@@ -1,5 +1,7 @@
 PODS:
   - Alamofire (3.4.1)
+  - AlamofireImage (2.4.0):
+    - Alamofire (~> 3.3)
   - AlamofireObjectMapper (3.0.0):
     - Alamofire (~> 3.2)
     - ObjectMapper (~> 1.0)
@@ -10,6 +12,7 @@ PODS:
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
+  - AlamofireImage (~> 2.0)
   - AlamofireObjectMapper (~> 3.0)
   - CGRectExtensions
   - DZNEmptyDataSet
@@ -27,6 +30,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  AlamofireImage: 87408b652e0f5ae5fe364035f15aea8b9b24c77e
   AlamofireObjectMapper: 2d16585d06177be0116d76de73497e77437798af
   CGRectExtensions: 67fa367a91d537bc2fcdd97069a66262777d1412
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
@@ -34,6 +38,6 @@ SPEC CHECKSUMS:
   ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: e6e3b7f3b971df12e8e9eccc90b119aa060fb251
+PODFILE CHECKSUM: fea871f397859b651795fbd534a1e941e4a2de94
 
 COCOAPODS: 1.0.1

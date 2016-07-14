@@ -1,0 +1,462 @@
+{
+    "status": "Y",
+    "message": null,
+    "result": [
+    {
+        "cityId": "110100",
+        "cityName": "北京",
+        "projectId": "2c90bf4e49d12cbb0149d14b00f50006",
+        "projectLocation": "北京市朝阳区阜通东大街一号院五号楼",
+        "projectName": "望京SOHO",
+        "localCoordinate": "116.486344,40.003323",
+        "projectContent": "望京SOHO 3Q是北京第一个亮相的3Q项目，建筑面积达5091平米，包括655多个工位。望京SOHO由全球知名建筑师、普利兹克奖获得者扎哈•哈迪德设计，是北京门户新地标。",
+        "projectArea": null,
+        "projectCode": "BJ-WJSOHO",
+        "managerId": "402825824b7afaff014b7d32b70b043d",
+        "projectManagerName": "方力维",
+        "projectManagerEmail": "",
+        "projectManagerTel": null,
+        "projectLargeImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1422535507388.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1422535532891.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1422535506870.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1422535507293.jpg"
+        }
+        ],
+        "projectSmallImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439773698272.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439773698539.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439773698622.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439773699172.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1443083444398.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1443083453818.jpg"
+        }
+        ],
+        "price": null,
+        "total": 0,
+        "remains": 0
+    },
+    {
+        "cityId": "310100",
+        "cityName": "上海",
+        "projectId": "2c90bf4e49d12cbb0149d1506a270007",
+        "projectLocation": "上海市黄浦区马当路388号D栋2-4层",
+        "projectName": "SOHO复兴广场",
+        "localCoordinate": "121.481722,31.220629",
+        "projectContent": "位于SOHO复兴广场的SOHO 3Q是上海第一个亮相的3Q项目，毗邻淮海中路商业街和时尚地标新天地，包括850个工位。",
+        "projectArea": null,
+        "projectCode": "SH-FXSOHO",
+        "managerId": "402825824b7afaff014b7d32b70b043d",
+        "projectManagerName": "方力维",
+        "projectManagerEmail": "",
+        "projectManagerTel": null,
+        "projectLargeImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1422535723380.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1422535722431.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1422535722433.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1422535722526.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1422535723289.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1422535723243.jpg"
+        }
+        ],
+        "projectSmallImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439778736197.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439778736351.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439778736427.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439778737674.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439778737934.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439778737975.jpg"
+        }
+        ],
+        "price": null,
+        "total": 0,
+        "remains": 0
+    },
+    {
+        "cityId": "110100",
+        "cityName": "北京",
+        "projectId": "402825824e303945014e3d84dff80ade",
+        "projectLocation": "北京市海淀区海淀北二街8号",
+        "projectName": "中关村SOHO",
+        "localCoordinate": "116.316407,39.989871",
+        "projectContent": "中关村3Q位于中关村西区核心版块，是北京西区核心的第一个3Q项目，建筑面积达2460平米，包括400多个工位。",
+        "projectArea": null,
+        "projectCode": "BJ-ZGCSOHO",
+        "managerId": "402825824b7afaff014b7d32b70b043d",
+        "projectManagerName": "方力维",
+        "projectManagerEmail": "",
+        "projectManagerTel": null,
+        "projectLargeImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1435909001459.png"
+        }
+        ],
+        "projectSmallImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776776928.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776778040.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776906055.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776914552.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776931555.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776938458.jpg"
+        }
+        ],
+        "price": null,
+        "total": 0,
+        "remains": 0
+    },
+    {
+        "cityId": "310100",
+        "cityName": "上海",
+        "projectId": "402825824e77ddd6014e8b46b9db1b0c",
+        "projectLocation": "上海市静安区铜仁路299号（近北京西路)",
+        "projectName": "SOHO东海广场",
+        "localCoordinate": "121.455266,31.233212",
+        "projectContent": "东海3Q位于上海南京西路中央商务区中心SOHO东海广场内，紧邻地铁2、7号线静安寺站，建筑面积1560平米，包括287个工位。",
+        "projectArea": null,
+        "projectCode": "SH-DHSOHO",
+        "managerId": "402825824b7afaff014b7d32b70b043d",
+        "projectManagerName": "方力维",
+        "projectManagerEmail": "",
+        "projectManagerTel": null,
+        "projectLargeImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1436946667887.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1436946667924.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1436946667996.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_introduction/1436946668002.jpg"
+        }
+        ],
+        "projectSmallImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776812588.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776812695.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776848102.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776853938.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776861772.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1439776869925.jpg"
+        }
+        ],
+        "price": null,
+        "total": 0,
+        "remains": 0
+    },
+    {
+        "cityId": "110100",
+        "cityName": "北京",
+        "projectId": "402825824f600c7d014f698089ef2bee",
+        "projectLocation": "北京市海淀区丹棱街6号",
+        "projectName": "丹棱SOHO",
+        "localCoordinate": "116.320418,39.984214",
+        "projectContent": "丹棱3Q位于中关村商圈黄金地段，紧邻地铁4号线、10号线海淀黄庄站，丹棱3Q建筑面积约1859平米，包括292个工位。",
+        "projectArea": null,
+        "projectCode": "BJ-DLSOHO",
+        "managerId": "402825824b7afaff014b7d32b70b043d",
+        "projectManagerName": "方力维",
+        "projectManagerEmail": "",
+        "projectManagerTel": null,
+        "projectLargeImgs": null,
+        "projectSmallImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1447325158745.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1447325173777.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1447325183206.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1447325293542.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1447325307416.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1447325318535.jpg"
+        }
+        ],
+        "price": null,
+        "total": 0,
+        "remains": 0
+    },
+    {
+        "cityId": "310100",
+        "cityName": "上海",
+        "projectId": "40282582526410c601527d52840d5013",
+        "projectLocation": "上海市长宁区金钟路968号",
+        "projectName": "凌空SOHO",
+        "localCoordinate": "121.358448,31.228727",
+        "projectContent": "凌空SOHO毗邻虹桥综合交通枢纽，是普利兹克奖得主扎哈・哈迪德在上海的首个建筑设计作品，已成为进入上海的门户性新地标。凌空3Q包括1619个工位。",
+        "projectArea": null,
+        "projectCode": "SH-LKSOHO",
+        "managerId": "402825824b7afaff014b7d32b70b043d",
+        "projectManagerName": "方力维",
+        "projectManagerEmail": "",
+        "projectManagerTel": null,
+        "projectLargeImgs": null,
+        "projectSmallImgs": null,
+        "price": null,
+        "total": 0,
+        "remains": 0
+    },
+    {
+        "cityId": "310100",
+        "cityName": "上海",
+        "projectId": "40282582541820a001542d144a396186",
+        "projectLocation": "18210370587300807",
+        "projectName": "18210370587279070",
+        "localCoordinate": "121.498589,31.23924",
+        "projectContent": "18210370587307608",
+        "projectArea": null,
+        "projectCode": "SH-WTB1SOHO",
+        "managerId": "402825824c0e3135014c11219d2001a8",
+        "projectManagerName": "乔阔",
+        "projectManagerEmail": "qiaokuo@soho3q.com",
+        "projectManagerTel": null,
+        "projectLargeImgs": null,
+        "projectSmallImgs": null,
+        "price": null,
+        "total": 0,
+        "remains": 0
+    },
+    {
+        "cityId": "110100",
+        "cityName": "北京",
+        "projectId": "40282582541820a001542d2ce36962e0",
+        "projectLocation": "18211982667173835",
+        "projectName": "18211982667157593",
+        "localCoordinate": "116.439742,39.928123",
+        "projectContent": "18211982667177940",
+        "projectArea": null,
+        "projectCode": "BJ-CYMSOHO",
+        "managerId": "40285caa4b3ea764014b3ec965d801b4",
+        "projectManagerName": "王尧",
+        "projectManagerEmail": "wangyao@soho3q.com",
+        "projectManagerTel": "",
+        "projectLargeImgs": null,
+        "projectSmallImgs": null,
+        "price": null,
+        "total": 0,
+        "remains": 0
+    },
+    {
+        "cityId": "110100",
+        "cityName": "北京",
+        "projectId": "402884ac4a52541b014a529612a20011",
+        "projectLocation": "北京市东城区朝阳门桥西南角",
+        "projectName": "银河SOHO",
+        "localCoordinate": "116.439959,39.92646",
+        "projectContent": "银河3Q位于北京东二环朝阳门桥西南角，是一个占地5万平米、总建筑面积33万平方米，是扎哈•哈达迪在中国设计的第一个大型综合体。银河3Q包括1000多个工位。",
+        "projectArea": null,
+        "projectCode": "BJ-YHSOHO",
+        "managerId": "402825824b7afaff014b7d32b70b043d",
+        "projectManagerName": "方力维",
+        "projectManagerEmail": "",
+        "projectManagerTel": null,
+        "projectLargeImgs": null,
+        "projectSmallImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450337728505.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450337728577.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450337728863.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450337728913.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450337728984.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450337729110.jpg"
+        }
+        ],
+        "price": null,
+        "total": 0,
+        "remains": 0
+    },
+    {
+        "cityId": "110100",
+        "cityName": "北京",
+        "projectId": "402884ac4a52541b014a52b29603002a",
+        "projectLocation": "北京市朝阳区光华路9号",
+        "projectName": "光华路SOHO2",
+        "localCoordinate": "116.459001,39.918779",
+        "projectContent": "光华路SOHO位于北京朝阳区CBD核心区内，紧邻第一使馆区。光华路3Q包括3200多个工位，是全国最大的共享办公中心。",
+        "projectArea": null,
+        "projectCode": "BJ-GHSOHO",
+        "managerId": "402825824b7afaff014b7d32b70b043d",
+        "projectManagerName": "方力维",
+        "projectManagerEmail": "",
+        "projectManagerTel": null,
+        "projectLargeImgs": null,
+        "projectSmallImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450333828097.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450333828325.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450333828442.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450333828622.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450333828728.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450333840961.jpg"
+        }
+        ],
+        "price": null,
+        "total": 0,
+        "remains": 0
+    },
+    {
+        "cityId": "310100",
+        "cityName": "上海",
+        "projectId": "402884ac4a52541b014a52b77b4e0031",
+        "projectLocation": "上海市黄浦区中山东二路88号（近新开河路）",
+        "projectName": "外滩SOHO",
+        "localCoordinate": "121.498589,31.23924",
+        "projectContent": "外滩SOHO地处历史悠久的上海外滩，既传承、发扬了新古典主义风格，也彰显了时尚繁华的商业活力。外滩3Q包括1600多个工位。",
+        "projectArea": null,
+        "projectCode": "SH-WTSOHO",
+        "managerId": "402825824b7afaff014b7d32b70b043d",
+        "projectManagerName": "方力维",
+        "projectManagerEmail": "",
+        "projectManagerTel": null,
+        "projectLargeImgs": null,
+        "projectSmallImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1446728131708.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1446727902390.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1446728056578.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1446728071087.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1446728083927.jpg"
+        }
+        ],
+        "price": null,
+        "total": 0,
+        "remains": 0
+    },
+    {
+        "cityId": "310100",
+        "cityName": "上海",
+        "projectId": "402884ac4a52541b014a52bf86060038",
+        "projectLocation": "上海市虹口区乍浦路600号（近衡水路）",
+        "projectName": "虹口SOHO",
+        "localCoordinate": "121.486441,31.271886",
+        "projectContent": "虹口3Q 位于上海四川北路商圈的虹口SOHO内，由建筑大师隈研吾所设计，包括660多个工位。",
+        "projectArea": null,
+        "projectCode": "SH-HKSOHO",
+        "managerId": "402825824b7afaff014b7d32b70b043d",
+        "projectManagerName": "方力维",
+        "projectManagerEmail": "",
+        "projectManagerTel": null,
+        "projectLargeImgs": null,
+        "projectSmallImgs": [
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450338894132.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450338894387.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450338894576.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450338894687.jpg"
+        },
+        {
+            "imgPath": "/entry/web/upload/imgs/soho_img_type_project/soho_img_project_banner/1450338894726.jpg"
+        }
+        ],
+        "price": null,
+        "total": 0,
+        "remains": 0
+    }
+    ],
+    "code": "0",
+    "serverIp": "192.168.220.180"
+}

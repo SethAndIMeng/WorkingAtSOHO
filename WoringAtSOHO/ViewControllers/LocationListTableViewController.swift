@@ -8,6 +8,9 @@
 
 import UIKit
 
+import Alamofire
+import AlamofireObjectMapper
+
 class LocationListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var customImageView: UIImageView!
@@ -18,6 +21,11 @@ class LocationListTableViewCell: UITableViewCell {
 }
 
 class LocationListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    //0:北京 1:上海
+    var projectList: [[ModelProjectItem]] = [[ModelProjectItem](), [ModelProjectItem]()]
+    //当前选择的是哪个
+    var selectedList = 0
 
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView!
@@ -34,6 +42,37 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         
         tableView.estimatedRowHeight = 200; // 设置UITableViewCell每行大概多高
         tableView.rowHeight = UITableViewAutomaticDimension;
+        
+        Alamofire.request(.GET, "http://soho3q.sohochina.com/salesvc/ajax/booking/getprojectlist", parameters: nil)
+            .validate()
+            .responseObject { [weak self] (response: Response<ModelProjectList, NSError>) in
+                switch response.result {
+                case .Success:
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    if let projectList = response.result.value?.result {
+                        for project in projectList {
+                            if let cityName = project.cityName {
+                                switch cityName {
+                                case "北京":
+                                    strongSelf.projectList[0].append(project)
+                                case "上海":
+                                    strongSelf.projectList[1].append(project)
+                                default:
+                                    break;
+                                }
+                            }
+                        }
+                        strongSelf.tableView.reloadData()
+                    }
+                    break
+                    
+                case .Failure:
+                    break
+                }
+                
+        }
     }
 
     override func didReceiveMemoryWarning() {
