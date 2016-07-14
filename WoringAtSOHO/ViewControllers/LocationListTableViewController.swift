@@ -10,6 +10,8 @@ import UIKit
 
 import Alamofire
 import AlamofireObjectMapper
+import AlamofireImage
+
 
 class LocationListTableViewCell: UITableViewCell {
     
@@ -18,6 +20,8 @@ class LocationListTableViewCell: UITableViewCell {
     @IBOutlet weak var labelContainer1: UIView!
     @IBOutlet weak var labelContainer2: UIView!
     var imageAspectConstraint: NSLayoutConstraint?  = nil
+    @IBOutlet weak var label1: UILabel!
+    @IBOutlet weak var label2: UILabel!
 }
 
 class LocationListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -26,8 +30,13 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
     var projectList: [[ModelProjectItem]] = [[ModelProjectItem](), [ModelProjectItem]()]
     //当前选择的是哪个
     var selectedList = 0
+    
+    var selectedProjectList: [ModelProjectItem] {
+        return projectList[selectedList]
+    }
 
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var cityChangeButton: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +49,10 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         
         self.title = "SOHO每日办公"
         
-        tableView.estimatedRowHeight = 200; // 设置UITableViewCell每行大概多高
+        tableView.estimatedRowHeight = 300; // 设置UITableViewCell每行大概多高
         tableView.rowHeight = UITableViewAutomaticDimension;
         
-        Alamofire.request(.GET, "http://soho3q.sohochina.com/salesvc/ajax/booking/getprojectlist", parameters: nil)
+        Alamofire.request(.GET, AjaxGetProjectList, parameters: nil)
             .validate()
             .responseObject { [weak self] (response: Response<ModelProjectList, NSError>) in
                 switch response.result {
@@ -89,31 +98,39 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return selectedProjectList.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("LocationListTableViewCell", forIndexPath: indexPath) as! LocationListTableViewCell
 
         // Configure the cell...
-        let image = UIImage(named: "DefaultSOHOImage")
-        if let image = image {
-            let aspect = image.size.width / image.size.height
-            if let imageAspectConstraint = cell.imageAspectConstraint {
-                cell.customImageView.removeConstraint(imageAspectConstraint)
-            }
-            cell.customImageView.image = image;
-            let imageAspectConstraint = NSLayoutConstraint(item: cell.customImageView, attribute:  NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: cell.customImageView, attribute: NSLayoutAttribute.Height, multiplier: aspect, constant: 0.0)
+        if nil == cell.imageAspectConstraint {
+            let aspect = CGFloat(16) / 9
+            let imageAspectConstraint = NSLayoutConstraint(item: cell.customImageView, attribute: .Width, relatedBy: .Equal, toItem: cell.customImageView, attribute: .Height, multiplier: aspect, constant: 0.0)
+            imageAspectConstraint.priority = 999
             cell.customImageView.addConstraint(imageAspectConstraint)
-            cell.imageAspectConstraint = imageAspectConstraint
         }
-        cell.labelContainer1.layer.cornerRadius = 5;
-        cell.labelContainer1.layer.masksToBounds = true;
-        cell.labelContainer2.layer.cornerRadius = 5;
-        cell.labelContainer2.layer.masksToBounds = true;
+        
+        cell.customImageView.image = nil
+        if let projectSmallImgs = selectedProjectList[indexPath.row].projectSmallImgs {
+            if projectSmallImgs.count > 0 {
+                if let imgPath = projectSmallImgs[0].imgPath, url = NSURL(string: ImageBaseUrl + imgPath) {
+                    cell.customImageView.af_setImageWithURL(url)
+                }
+            }
+        }
+        
+        cell.label2.text = selectedProjectList[indexPath.row].projectName
+        
+        cell.labelContainer1.layer.cornerRadius = 5
+        cell.labelContainer1.layer.masksToBounds = true
+        cell.labelContainer2.layer.cornerRadius = 5
+        cell.labelContainer2.layer.masksToBounds = true
 
         return cell
     }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView .deselectRowAtIndexPath(indexPath, animated: true)
@@ -163,5 +180,9 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func cityChangedFromSender(sender: UISegmentedControl) {
+        selectedList = sender.selectedSegmentIndex
+        tableView.reloadData()
+    }
 
 }
