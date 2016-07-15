@@ -133,7 +133,20 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView .deselectRowAtIndexPath(indexPath, animated: true)
+        self.performSegueWithIdentifier("SegueToLocationDetail", sender: self)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        
+        if segue.identifier == "SegueToLocationDetail" {
+            if let
+                indexPath = tableView.indexPathForSelectedRow,
+                controller = segue.destinationViewController as? LocationDetailViewController {
+                controller.projectInfo = selectedProjectList[indexPath.row]
+            }
+        }
     }
 
     /*

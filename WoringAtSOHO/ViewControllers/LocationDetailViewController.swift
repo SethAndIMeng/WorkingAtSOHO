@@ -7,16 +7,35 @@
 //
 
 import UIKit
+import Auk
 
 class LocationDetailViewController: UIViewController {
     
+    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var imageScrollView: UIScrollView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
-    @IBOutlet weak var scrollViewContentHeight: NSLayoutConstraint!
+    var projectInfo: ModelProjectItem? = nil
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        scrollView.contentInset = UIEdgeInsetsZero
+//        contentViewHeight.constant = 300
 
         // Do any additional setup after loading the view.
+        if let projectInfo = projectInfo, projectSmallImgs = projectInfo.projectSmallImgs {
+            imageScrollView.auk.settings.contentMode = .ScaleAspectFill
+            for img in projectSmallImgs {
+                if let imgPath = img.imgPath {
+                    imageScrollView.auk.show(url: ImageBaseUrl + imgPath)
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
