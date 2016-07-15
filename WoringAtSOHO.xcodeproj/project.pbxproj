@@ -17,6 +17,7 @@
 		0D0C2DEE1D377FBD007BC936 /* ModelProjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0C2DED1D377FBD007BC936 /* ModelProjectList.swift */; };
 		0D0C2DF01D378B0E007BC936 /* SOHOProjectListSample.json in Resources */ = {isa = PBXBuildFile; fileRef = 0D0C2DEF1D378B0E007BC936 /* SOHOProjectListSample.json */; };
 		0D0C2DF21D381460007BC936 /* SOHOConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0C2DF11D381460007BC936 /* SOHOConstants.swift */; };
+		0D0C2DF41D3894B6007BC936 /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0C2DF31D3894B6007BC936 /* LocationDetailViewController.swift */; };
 		76033D5EB7A828F7C24BF6CC /* Pods_WoringAtSOHO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39E4210630C881AC220C4587 /* Pods_WoringAtSOHO.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		0D0C2DED1D377FBD007BC936 /* ModelProjectList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelProjectList.swift; sourceTree = "<group>"; };
 		0D0C2DEF1D378B0E007BC936 /* SOHOProjectListSample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SOHOProjectListSample.json; sourceTree = "<group>"; };
 		0D0C2DF11D381460007BC936 /* SOHOConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SOHOConstants.swift; sourceTree = "<group>"; };
+		0D0C2DF31D3894B6007BC936 /* LocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
 		39E4210630C881AC220C4587 /* Pods_WoringAtSOHO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WoringAtSOHO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78EE0EDDB0F315522A39ED6B /* Pods-WoringAtSOHO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoringAtSOHO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WoringAtSOHO/Pods-WoringAtSOHO.debug.xcconfig"; sourceTree = "<group>"; };
 		F0EB0D3B76F30AC86361C31A /* Pods-WoringAtSOHO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoringAtSOHO.release.xcconfig"; path = "Pods/Target Support Files/Pods-WoringAtSOHO/Pods-WoringAtSOHO.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				0D0C2DE81D373C66007BC936 /* LocationListTableViewController.swift */,
+				0D0C2DF31D3894B6007BC936 /* LocationDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				0D0C2DE91D373C66007BC936 /* LocationListTableViewController.swift in Sources */,
 				0D02DF5E1D3730100075596C /* AppDelegate.swift in Sources */,
 				0D0C2DEE1D377FBD007BC936 /* ModelProjectList.swift in Sources */,
+				0D0C2DF41D3894B6007BC936 /* LocationDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

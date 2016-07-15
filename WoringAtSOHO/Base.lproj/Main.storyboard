@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -165,10 +166,10 @@
             </objects>
             <point key="canvasLocation" x="-181" y="83"/>
         </scene>
-        <!--View Controller-->
+        <!--Location Detail View Controller-->
         <scene sceneID="ivN-Fk-0ut">
             <objects>
-                <viewController id="fvs-KK-1Ad" sceneMemberID="viewController">
+                <viewController id="fvs-KK-1Ad" customClass="LocationDetailViewController" customModule="WoringAtSOHO" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Cam-yk-bbj"/>
                         <viewControllerLayoutGuide type="bottom" id="FsW-sK-2QG"/>
@@ -176,8 +177,49 @@
                     <view key="view" contentMode="scaleToFill" id="hlP-lT-iQq">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZM-k9-yMD">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X5k-hv-mcv" userLabel="Container View">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <subviews>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Twr-GR-q6Z">
+                                                <rect key="frame" x="0.0" y="8" width="600" height="337.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Twr-GR-q6Z" secondAttribute="height" multiplier="16:9" id="xXp-pz-A8e"/>
+                                                </constraints>
+                                            </scrollView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="Twr-GR-q6Z" secondAttribute="trailing" id="2W6-f4-5Va"/>
+                                            <constraint firstItem="Twr-GR-q6Z" firstAttribute="top" secondItem="X5k-hv-mcv" secondAttribute="top" constant="8" id="BaH-78-mgx"/>
+                                            <constraint firstItem="Twr-GR-q6Z" firstAttribute="leading" secondItem="X5k-hv-mcv" secondAttribute="leading" id="LDj-kJ-Taa"/>
+                                            <constraint firstAttribute="height" priority="250" constant="536" id="jb9-h7-o1o"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="X5k-hv-mcv" secondAttribute="trailing" id="2vN-da-Cxk"/>
+                                    <constraint firstAttribute="bottom" secondItem="X5k-hv-mcv" secondAttribute="bottom" id="IGE-L3-4R4"/>
+                                    <constraint firstItem="X5k-hv-mcv" firstAttribute="leading" secondItem="aZM-k9-yMD" secondAttribute="leading" id="KVf-p7-SvW"/>
+                                    <constraint firstItem="X5k-hv-mcv" firstAttribute="top" secondItem="aZM-k9-yMD" secondAttribute="top" id="xUx-5A-o8K"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="X5k-hv-mcv" firstAttribute="width" secondItem="hlP-lT-iQq" secondAttribute="width" id="M3X-i5-Agd"/>
+                            <constraint firstItem="aZM-k9-yMD" firstAttribute="leading" secondItem="hlP-lT-iQq" secondAttribute="leadingMargin" constant="-20" id="Off-CF-cge"/>
+                            <constraint firstItem="FsW-sK-2QG" firstAttribute="top" secondItem="aZM-k9-yMD" secondAttribute="bottom" id="cTG-rc-Lnz"/>
+                            <constraint firstItem="aZM-k9-yMD" firstAttribute="top" secondItem="Cam-yk-bbj" secondAttribute="bottom" id="hLP-1F-AcY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aZM-k9-yMD" secondAttribute="trailing" constant="-20" id="q7t-x9-Cbt"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="scrollViewContentHeight" destination="jb9-h7-o1o" id="0BP-Cd-MTG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jlM-ch-5ST" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
