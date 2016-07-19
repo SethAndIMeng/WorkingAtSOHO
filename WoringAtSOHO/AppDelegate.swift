@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import moa
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if !DEBUG
             sleep(2)
         #endif
+        
+//        Moa.settings.cache.requestCachePolicy = .ReturnCacheDataElseLoad
+        
         return true
     }
 

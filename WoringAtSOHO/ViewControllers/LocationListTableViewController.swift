@@ -10,7 +10,8 @@ import UIKit
 
 import Alamofire
 import AlamofireObjectMapper
-import AlamofireImage
+//import AlamofireImage
+import Kingfisher
 
 
 class LocationListTableViewCell: UITableViewCell {
@@ -47,7 +48,7 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        self.title = "SOHO每日办公"
+        self.title = "SOHO今日办公"
         
         tableView.estimatedRowHeight = 300; // 设置UITableViewCell每行大概多高
         tableView.rowHeight = UITableViewAutomaticDimension;
@@ -116,7 +117,8 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         if let projectSmallImgs = selectedProjectList[indexPath.row].projectSmallImgs {
             if projectSmallImgs.count > 0 {
                 if let imgPath = projectSmallImgs[0].imgPath, url = NSURL(string: ImageBaseUrl + imgPath) {
-                    cell.customImageView.af_setImageWithURL(url)
+//                    cell.customImageView.af_setImageWithURL(url)
+                    cell.customImageView.kf_setImageWithURL(url)
                 }
             }
         }
@@ -138,7 +140,7 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
+//        super.prepareForSegue(segue, sender: sender)
         
         if segue.identifier == "SegueToLocationDetail" {
             if let

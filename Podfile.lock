@@ -1,22 +1,17 @@
 PODS:
   - Alamofire (3.4.1)
-  - AlamofireImage (2.4.0):
-    - Alamofire (~> 3.3)
   - AlamofireObjectMapper (3.0.0):
     - Alamofire (~> 3.2)
     - ObjectMapper (~> 1.0)
-  - Auk (2.1.5):
-    - moa (~> 3.0)
   - CGRectExtensions (2.0)
-  - moa (3.0.0)
+  - Kingfisher (2.4.2)
   - ObjectMapper (1.3.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
-  - AlamofireImage (~> 2.0)
   - AlamofireObjectMapper (~> 3.0)
-  - Auk (~> 2.1)
   - CGRectExtensions
+  - Kingfisher (~> 2.4)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -30,14 +25,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  AlamofireImage: 87408b652e0f5ae5fe364035f15aea8b9b24c77e
   AlamofireObjectMapper: 2d16585d06177be0116d76de73497e77437798af
-  Auk: 25fe0c1ac0d22b387eca4c5ea9de48c9caea5c05
   CGRectExtensions: 67fa367a91d537bc2fcdd97069a66262777d1412
-  moa: 32ca142e67accf6124087abba94ff5c288ad1d7e
+  Kingfisher: 05bf8d04408aaa70fcd2c8c81b9f1d0f1ad313dd
   ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 9c01e60216041a45fd2d9e0fd390dcbf05470d35
+PODFILE CHECKSUM: faad1401a2501ad0fb277ddc721578c78e313521
 
 COCOAPODS: 1.0.1

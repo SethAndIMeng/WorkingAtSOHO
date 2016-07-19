@@ -7,13 +7,25 @@
 //
 
 import UIKit
-import Auk
+//import Auk
 
-class LocationDetailViewController: UIViewController {
+//class ImageSlideshowCollectionViewCell: UICollectionViewCell {
+//    @IBOutlet weak var imageView: UIImageView!
+//}
+
+let CGFloatEpsilon = CGFloat(0.001)
+
+class LocationDetailViewController: UIViewController, UIScrollViewDelegate
+{
+    @IBOutlet weak var mainContentView: UIView!
+    @IBOutlet weak var customImageScrollView: UIScrollView!
+    @IBOutlet weak var customImagePageControl: UIPageControl!
     
-    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var imageScrollView: UIScrollView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var projectDescription: UILabel!
+    
+    var pageNumber = 0
     
     var projectInfo: ModelProjectItem? = nil
     
@@ -23,19 +35,59 @@ class LocationDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        scrollView.contentInset = UIEdgeInsetsZero
-//        contentViewHeight.constant = 300
 
         // Do any additional setup after loading the view.
-        if let projectInfo = projectInfo, projectSmallImgs = projectInfo.projectSmallImgs {
-            imageScrollView.auk.settings.contentMode = .ScaleAspectFill
-            for img in projectSmallImgs {
-                if let imgPath = img.imgPath {
-                    imageScrollView.auk.show(url: ImageBaseUrl + imgPath)
-                }
-            }
+        
+        if let title = projectInfo?.projectName {
+            self.title = title
         }
+        locationLabel.text = projectInfo?.projectLocation
+        projectDescription.text = projectInfo?.projectContent
+        
+        if let projectInfo = projectInfo, projectSmallImgs = projectInfo.projectSmallImgs {
+            pageNumber = projectSmallImgs.count
+            
+            var prevView: UIView? = nil
+            customImagePageControl.numberOfPages = pageNumber
+            for i in 0...(pageNumber + 1) {
+                let iv = UIImageView()
+                let index = (i + pageNumber - 1) % pageNumber
+                iv.translatesAutoresizingMaskIntoConstraints = false
+                //            iv.image = UIImage(named: picName)
+                if let imgPath = projectSmallImgs[index].imgPath {
+                    iv.kf_setImageWithURL(NSURL(string:ImageBaseUrl + imgPath))
+                }
+                
+                iv.contentMode = .ScaleAspectFill
+                iv.clipsToBounds = true
+                iv.userInteractionEnabled = true
+                customImageScrollView.addSubview(iv)
+                
+                if nil != prevView {
+                    customImageScrollView.addConstraint(NSLayoutConstraint(item: iv, attribute: .Leading, relatedBy: .Equal, toItem: prevView, attribute: .Trailing, multiplier: 1, constant: 0))
+                }
+                customImageScrollView.addConstraint(NSLayoutConstraint(item: iv, attribute: .CenterY, relatedBy: .Equal, toItem: customImageScrollView, attribute: .CenterY, multiplier: 1, constant: 0))
+                customImageScrollView.addConstraint(NSLayoutConstraint(item: iv, attribute: .Width, relatedBy: .Equal, toItem: customImageScrollView, attribute: .Width, multiplier: 1, constant: 0))
+                customImageScrollView.addConstraint(NSLayoutConstraint(item: iv, attribute: .Height, relatedBy: .Equal, toItem: customImageScrollView, attribute: .Height, multiplier: 1, constant: 0))
+                
+                if 0 == i {
+                    customImageScrollView.addConstraint(NSLayoutConstraint(item: iv, attribute: .Leading, relatedBy: .Equal, toItem: iv.superview, attribute: .Leading, multiplier: 1, constant: 0))
+                    customImageScrollView.addConstraint(NSLayoutConstraint(item: iv, attribute: .Top, relatedBy: .Equal, toItem: iv.superview, attribute: .Top, multiplier: 1, constant: 0))
+                    customImageScrollView.addConstraint(NSLayoutConstraint(item: iv, attribute: .Bottom, relatedBy: .Equal, toItem: iv.superview, attribute: .Bottom, multiplier: 1, constant: 0))
+                }
+                if pageNumber + 1 == i {
+                    customImageScrollView.addConstraint(NSLayoutConstraint(item: iv, attribute: .Trailing, relatedBy: .Equal, toItem: iv.superview, attribute: .Trailing, multiplier: 1, constant: 0))
+                }
+                
+                prevView = iv
+            }
+            
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,5 +105,28 @@ class LocationDetailViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView == customImageScrollView {
+            if pageNumber > 0 {
+                let width = scrollView.bounds.width
+                let offsetX = scrollView.contentOffset.x
+                
+                if fabs(offsetX - 0) < CGFloatEpsilon { //最左边一个是(index=0)最后一个
+                    scrollView.contentOffset = CGPointMake(width * CGFloat(pageNumber), 0)
+                }
+                if fabs(offsetX - width * CGFloat(pageNumber + 1)) < CGFloatEpsilon { //最右边一个(index=pageNumber+1)是第一个
+                    scrollView.contentOffset = CGPointMake(width, 0)
+                }
+                
+                // 此处不能用 offsetX 代替 scrollView.contentOffset.x，这个值在变化
+                let currentPage = scrollView.contentOffset.x / width - 0.5
+                customImagePageControl.currentPage = Int(currentPage)
+            }
+        } else if scrollView == self.scrollView {
+//            print("xx")
+        }
+    }
+    
 
 }
