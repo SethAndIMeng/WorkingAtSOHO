@@ -47,7 +47,12 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        self.title = "SOHO移动办公"
+        if let infoDictionary = NSBundle.mainBundle().infoDictionary,
+            title = infoDictionary["CFBundleDisplayName"] as? String {
+            self.title = "SOHO" + title
+        } else {
+            self.title = "SOHO"
+        }
         
         tableView.estimatedRowHeight = 300; // 设置UITableViewCell每行大概多高
         tableView.rowHeight = UITableViewAutomaticDimension;

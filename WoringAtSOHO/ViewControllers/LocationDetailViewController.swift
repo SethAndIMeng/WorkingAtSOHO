@@ -7,15 +7,11 @@
 //
 
 import UIKit
-//import Auk
-
-//class ImageSlideshowCollectionViewCell: UICollectionViewCell {
-//    @IBOutlet weak var imageView: UIImageView!
-//}
+import CVCalendar
 
 let CGFloatEpsilon = CGFloat(0.001)
 
-class LocationDetailViewController: UIViewController, UIScrollViewDelegate
+class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCalendarViewDelegate, CVCalendarMenuViewDelegate
 {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var mainContentView: UIView!
@@ -25,6 +21,9 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var projectDescription: UILabel!
+    
+    @IBOutlet weak var calendarMenuView: CVCalendarMenuView!
+    @IBOutlet weak var calendarView: CVCalendarView!
     
     var pageNumber = 0
     
@@ -38,7 +37,7 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        scrollView.contentInset = UIEdgeInsetsZero
         priceLabel.layer.cornerRadius = 5
         priceLabel.layer.masksToBounds = true
         if let title = projectInfo?.projectName {
@@ -85,8 +84,16 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate
                 
                 prevView = iv
             }
-            
+            calendarMenuView.backgroundColor = UIColor.clearColor()
+            calendarView.backgroundColor = UIColor.clearColor()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        calendarMenuView.commitMenuViewUpdate()
+        calendarView.commitCalendarViewUpdate()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -128,8 +135,16 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate
                 customImagePageControl.currentPage = Int(currentPage)
             }
         } else if scrollView == self.scrollView {
-//            print("xx")
+            
         }
+    }
+    
+    //CVCalendarViewDelegate
+    func presentationMode() -> CalendarMode {
+        return .MonthView
+    }
+    func firstWeekday() -> Weekday {
+        return .Monday
     }
     
     deinit {
