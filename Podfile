@@ -10,6 +10,8 @@ target 'WoringAtSOHO' do
 #    pod 'AlamofireImage', '~> 2.0'
 #    pod 'Auk', '~> 2.1'
     pod 'Kingfisher', '~> 2.4'
+    pod 'WebViewJavascriptBridge', '~> 5.0'
+
 #    pod 'DZNEmptyDataSet' #空列表显示
     pod 'CGRectExtensions'
 end

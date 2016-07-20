@@ -17,6 +17,7 @@ let CGFloatEpsilon = CGFloat(0.001)
 
 class LocationDetailViewController: UIViewController, UIScrollViewDelegate
 {
+    @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var mainContentView: UIView!
     @IBOutlet weak var customImageScrollView: UIScrollView!
     @IBOutlet weak var customImagePageControl: UIPageControl!
@@ -38,6 +39,8 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate
 
         // Do any additional setup after loading the view.
         
+        priceLabel.layer.cornerRadius = 5
+        priceLabel.layer.masksToBounds = true
         if let title = projectInfo?.projectName {
             self.title = title
         }
@@ -55,6 +58,7 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate
                 iv.translatesAutoresizingMaskIntoConstraints = false
                 //            iv.image = UIImage(named: picName)
                 if let imgPath = projectSmallImgs[index].imgPath {
+                    iv.backgroundColor = UIColor.yellowColor()
                     iv.kf_setImageWithURL(NSURL(string:ImageBaseUrl + imgPath))
                 }
                 
@@ -128,5 +132,9 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate
         }
     }
     
+    deinit {
+        customImageScrollView.delegate = nil
+        scrollView.delegate = nil
+    }
 
 }

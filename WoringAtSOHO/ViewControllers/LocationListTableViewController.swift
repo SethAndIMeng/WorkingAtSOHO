@@ -37,7 +37,6 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var cityChangeButton: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +47,7 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        self.title = "SOHO今日办公"
+        self.title = "SOHO移动办公"
         
         tableView.estimatedRowHeight = 300; // 设置UITableViewCell每行大概多高
         tableView.rowHeight = UITableViewAutomaticDimension;
@@ -198,6 +197,11 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func cityChangedFromSender(sender: UISegmentedControl) {
         selectedList = sender.selectedSegmentIndex
         tableView.reloadData()
+    }
+    
+    deinit {
+        tableView.delegate = nil
+        tableView.dataSource = nil
     }
 
 }

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "免费咖啡.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "pic1@2x.jpg",
       "scale" : "2x"
     },
     {
