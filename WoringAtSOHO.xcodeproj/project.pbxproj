@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D022E6A1D45B67A002E11B6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D022E691D45B67A002E11B6 /* LoginViewController.swift */; };
 		0D02DF5E1D3730100075596C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D02DF5D1D3730100075596C /* AppDelegate.swift */; };
 		0D02DF631D3730100075596C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D02DF611D3730100075596C /* Main.storyboard */; };
 		0D02DF651D3730100075596C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D02DF641D3730100075596C /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D022E691D45B67A002E11B6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0D02DF5A1D3730100075596C /* WoringAtSOHO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoringAtSOHO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D02DF5D1D3730100075596C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D02DF621D3730100075596C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				0D0C2DE81D373C66007BC936 /* LocationListTableViewController.swift */,
 				0D0C2DF31D3894B6007BC936 /* LocationDetailViewController.swift */,
+				0D022E691D45B67A002E11B6 /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D022E6A1D45B67A002E11B6 /* LoginViewController.swift in Sources */,
 				0D0C2DF21D381460007BC936 /* SOHOConstants.swift in Sources */,
 				0D0C2DE91D373C66007BC936 /* LocationListTableViewController.swift in Sources */,
 				0D02DF5E1D3730100075596C /* AppDelegate.swift in Sources */,

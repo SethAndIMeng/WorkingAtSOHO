@@ -8,7 +8,11 @@
 
 import UIKit
 
+let BaseUrl = "http://soho3q.sohochina.com" //测试
+
 //获取所有项目的接口地址
-let AjaxGetProjectList = "http://soho3q.sohochina.com/salesvc/ajax/booking/getprojectlist"
+let AjaxGetProjectList = BaseUrl + "/salesvc/ajax/booking/getprojectlist"
 //图片基地址url
 let ImageBaseUrl = "http://www.soho3q.com/entry/ImgStreamServlet.do?imgPath="
+
+let LoginUrl = BaseUrl + "/user/login.html"

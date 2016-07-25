@@ -22,6 +22,7 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var projectDescription: UILabel!
     
+    @IBOutlet weak var yearMonthLabel: UILabel!
     @IBOutlet weak var calendarMenuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
     
@@ -84,6 +85,7 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
                 
                 prevView = iv
             }
+            yearMonthLabel.text = Date(date: NSDate()).globalDescription
             calendarMenuView.backgroundColor = UIColor.clearColor()
             calendarView.backgroundColor = UIColor.clearColor()
         }
@@ -145,6 +147,22 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
     }
     func firstWeekday() -> Weekday {
         return .Monday
+    }
+    func presentedDateUpdated(date: Date) {
+        yearMonthLabel.text = date.globalDescription
+    }
+    
+    func shouldAutoSelectDayOnWeekChange() -> Bool {
+        return false
+    }
+    
+    func shouldAutoSelectDayOnMonthChange() -> Bool {
+        return false
+    }
+    
+    func didSelectDayView(dayView: DayView, animationDidFinish: Bool) {
+        let date = dayView.date
+        NSLog("%@-%@", date, animationDidFinish)
     }
     
     deinit {

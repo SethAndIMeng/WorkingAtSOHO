@@ -7,21 +7,37 @@
 //
 
 import UIKit
-//import moa
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        #if !DEBUG
-            sleep(2)
-        #endif
         
-//        Moa.settings.cache.requestCachePolicy = .ReturnCacheDataElseLoad
+        let storyboard = UIStoryboard(name: "LaunchScreen", bundle: NSBundle.mainBundle())
+        if let launchViewController = storyboard.instantiateInitialViewController() {
+            
+            //代码启动，便于之后加动画
+            let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            window.rootViewController = launchViewController
+            self.window = window
+            window.makeKeyAndVisible()
+
+            var sleepTime = Int64(2 * NSEC_PER_SEC)
+            #if DEBUG
+                sleepTime = 0
+            #endif
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, sleepTime), dispatch_get_main_queue(), { [weak self] in
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                let mainViewController = storyboard.instantiateInitialViewController()
+                if let window = self?.window {
+                    window.rootViewController = mainViewController
+                }
+            })
+        }
         
         return true
     }
