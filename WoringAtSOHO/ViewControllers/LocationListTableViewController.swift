@@ -57,7 +57,7 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         tableView.estimatedRowHeight = 300; // 设置UITableViewCell每行大概多高
         tableView.rowHeight = UITableViewAutomaticDimension;
         
-        Alamofire.request(.GET, AjaxGetProjectList, parameters: nil)
+        Alamofire.request(.GET, AjaxGetProjectListAPIUrl, parameters: nil)
             .validate()
             .responseObject { [weak self] (response: Response<ModelProjectList, NSError>) in
                 switch response.result {

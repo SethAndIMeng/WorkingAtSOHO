@@ -10,6 +10,8 @@ import UIKit
 import WebKit
 import WebViewJavascriptBridge
 
+import Alamofire
+
 class LoginViewController: UIViewController, WKNavigationDelegate {
 
     weak var webView: WKWebView! = nil
@@ -113,21 +115,60 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
             } else {
                 webView.evaluateJavaScript("seth_get3QUserIdentity()", completionHandler: { (result, error) in
                     if let result = result as? [String: String] {
-                        if let token = result["token"] {
+                        if let token = result["token"], sid = result["sid"] {
                             SOHO3Q_USER_TOKEN = token
-                            #if DEBUG
-                                UIAlertView(title: "token", message: "\(token)", delegate: nil, cancelButtonTitle: "OK").show()
-                            #endif
-                        }
-                        if let sid = result["sid"] {
                             SOHO3Q_USER_SID = sid
-                            #if DEBUG
-                                UIAlertView(title: "sid", message: "\(sid)", delegate: nil, cancelButtonTitle: "OK").show()
-                            #endif
-                        }
-                        self.dismissViewControllerAnimated(true, completion: {
                             
-                        })
+                            Alamofire.request(.POST, GetUserInfoAPIUrl,
+                                parameters: nil,
+                                encoding: .URL,
+                                headers: [
+                                    "Content-Type": "application/x-www-form-urlencoded",
+                                    "Accept-Encoding": "gzip, deflate",
+                                    "Cookie": "sid=\(sid); token=\(token)"]
+                                )
+                                .validate()
+                                .responseObject(completionHandler: {
+                                    [weak self] (response: Response<ModelGetUserInfo, NSError>) in
+                                    
+                                    switch response.result {
+                                    case .Success:
+                                        guard let strongSelf = self else {
+                                            return
+                                        }
+                                        var title = "非会员"
+                                        var message = "去成为会员"
+                                        if let result = response.result.value?.result {
+                                            if let memberType = result.memberType {
+                                                switch memberType {
+                                                case "Float":
+                                                    fallthrough
+                                                case "Fix":
+                                                    fallthrough
+                                                case "Both":
+                                                    //已经是会员
+                                                    title = "已经是会员"
+                                                    message = "走￥120流程"
+                                                    break;
+                                                    
+                                                default:
+                                                    //不是会员
+                                                    title = "不是会员"
+                                                    message = "走￥99流程"
+                                                    break;
+                                                }
+                                            }
+                                            strongSelf.dismissViewControllerAnimated(true, completion: {
+                                                UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "OK").show()
+                                            })
+                                        }
+                                        break
+                                    case .Failure:
+                                        break
+                                    }
+                                })
+                        }
+                        
                     }
                 })
                 policy = .Cancel

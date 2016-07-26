@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0D022E6A1D45B67A002E11B6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D022E691D45B67A002E11B6 /* LoginViewController.swift */; };
 		0D022E6E1D4716F1002E11B6 /* readCookie.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D022E6D1D4716F1002E11B6 /* readCookie.js */; };
+		0D022E721D473E99002E11B6 /* ModelGetUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D022E711D473E99002E11B6 /* ModelGetUserInfo.swift */; };
+		0D022E741D473FC6002E11B6 /* ModelSOHOApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D022E731D473FC6002E11B6 /* ModelSOHOApi.swift */; };
 		0D02DF5E1D3730100075596C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D02DF5D1D3730100075596C /* AppDelegate.swift */; };
 		0D02DF631D3730100075596C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D02DF611D3730100075596C /* Main.storyboard */; };
 		0D02DF651D3730100075596C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D02DF641D3730100075596C /* Assets.xcassets */; };
@@ -44,6 +46,8 @@
 /* Begin PBXFileReference section */
 		0D022E691D45B67A002E11B6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0D022E6D1D4716F1002E11B6 /* readCookie.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = readCookie.js; sourceTree = "<group>"; };
+		0D022E711D473E99002E11B6 /* ModelGetUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelGetUserInfo.swift; sourceTree = "<group>"; };
+		0D022E731D473FC6002E11B6 /* ModelSOHOApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelSOHOApi.swift; sourceTree = "<group>"; };
 		0D02DF5A1D3730100075596C /* WoringAtSOHO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoringAtSOHO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D02DF5D1D3730100075596C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D02DF621D3730100075596C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -162,8 +166,10 @@
 			isa = PBXGroup;
 			children = (
 				0D0C2DED1D377FBD007BC936 /* ModelProjectList.swift */,
+				0D022E711D473E99002E11B6 /* ModelGetUserInfo.swift */,
 				0D0C2DEF1D378B0E007BC936 /* SOHOProjectListSample.json */,
 				0D0C2DF11D381460007BC936 /* SOHOConstants.swift */,
+				0D022E731D473FC6002E11B6 /* ModelSOHOApi.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -381,8 +387,10 @@
 				0D022E6A1D45B67A002E11B6 /* LoginViewController.swift in Sources */,
 				0D0C2DF21D381460007BC936 /* SOHOConstants.swift in Sources */,
 				0D0C2DE91D373C66007BC936 /* LocationListTableViewController.swift in Sources */,
+				0D022E741D473FC6002E11B6 /* ModelSOHOApi.swift in Sources */,
 				0D02DF5E1D3730100075596C /* AppDelegate.swift in Sources */,
 				0D0C2DEE1D377FBD007BC936 /* ModelProjectList.swift in Sources */,
+				0D022E721D473E99002E11B6 /* ModelGetUserInfo.swift in Sources */,
 				0D0C2DF41D3894B6007BC936 /* LocationDetailViewController.swift in Sources */,
 				0DDAFFB91D3F3EC50006F238 /* CopyableLabel.swift in Sources */,
 			);

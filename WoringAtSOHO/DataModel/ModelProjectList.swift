@@ -9,24 +9,16 @@
 import UIKit
 import ObjectMapper
 
-class ModelProjectList: Mappable {
-    var status: String?
-    var message: String?
+class ModelProjectList: ModelSOHOApi {
     
     var result: [ModelProjectItem]?
     
-    var code: String?
-    var serverIp: String?
-    
     required init?(_ map: Map) {
-        
+        super.init(map)
     }
     
-    func mapping(map: Map) {
-        status <- map["status"]
-        message <- map["message"]
-        code <- map["code"]
-        serverIp <- map["serverIp"]
+    override func mapping(map: Map) {
+        super.mapping(map)
         result <- map["result"]
     }
 }
