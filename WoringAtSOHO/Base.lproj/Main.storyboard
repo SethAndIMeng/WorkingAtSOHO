@@ -589,16 +589,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CloseButton2" translatesAutoresizingMaskIntoConstraints="NO" id="TkE-Yp-Y2I" userLabel="CloseButtonImage">
-                                <rect key="frame" x="6" y="0.0" width="44" height="44"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eyz-it-IkC" userLabel="CloseButtonBackground">
+                                <rect key="frame" x="10.5" y="4.5" width="35" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Swm-10-1kP"/>
+                                    <constraint firstAttribute="width" constant="35" id="Z6j-bB-Gbg"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jD3-d2-yTG" userLabel="CloseButton">
                                 <rect key="frame" x="6" y="0.0" width="44" height="44"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="SDk-a2-QEr"/>
                                     <constraint firstAttribute="width" constant="44" id="yTt-SD-9zZ"/>
                                 </constraints>
+                                <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="CloseButtonPressed:" destination="0ab-jr-5EB" eventType="touchUpInside" id="Iqn-lR-wlc"/>
                                 </connections>
@@ -606,19 +615,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="TkE-Yp-Y2I" firstAttribute="centerX" secondItem="jD3-d2-yTG" secondAttribute="centerX" id="7QR-N6-UwD"/>
                             <constraint firstItem="jD3-d2-yTG" firstAttribute="top" secondItem="XUt-jj-hlM" secondAttribute="bottom" id="B7X-eW-Qvh"/>
                             <constraint firstItem="wlT-Li-nbA" firstAttribute="top" secondItem="jD3-d2-yTG" secondAttribute="bottom" constant="8" id="LUF-8Z-beC"/>
-                            <constraint firstItem="TkE-Yp-Y2I" firstAttribute="height" secondItem="jD3-d2-yTG" secondAttribute="height" id="M7R-au-psI"/>
-                            <constraint firstItem="TkE-Yp-Y2I" firstAttribute="top" secondItem="jD3-d2-yTG" secondAttribute="top" id="YCz-gv-Wd3"/>
-                            <constraint firstItem="TkE-Yp-Y2I" firstAttribute="centerY" secondItem="jD3-d2-yTG" secondAttribute="centerY" id="pUf-nY-9q9"/>
-                            <constraint firstItem="TkE-Yp-Y2I" firstAttribute="width" secondItem="jD3-d2-yTG" secondAttribute="width" id="pro-SD-oEj"/>
+                            <constraint firstItem="eyz-it-IkC" firstAttribute="centerX" secondItem="jD3-d2-yTG" secondAttribute="centerX" id="WGw-oP-chp"/>
+                            <constraint firstItem="eyz-it-IkC" firstAttribute="centerY" secondItem="jD3-d2-yTG" secondAttribute="centerY" id="hak-YE-y26"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jD3-d2-yTG" secondAttribute="trailing" id="rk0-jQ-Vsi"/>
                             <constraint firstItem="jD3-d2-yTG" firstAttribute="leading" secondItem="1PJ-GF-Evb" secondAttribute="leadingMargin" constant="-10" id="sBh-TB-8lZ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="YCz-gv-Wd3"/>
                                 <exclude reference="rk0-jQ-Vsi"/>
                                 <exclude reference="LUF-8Z-beC"/>
                             </mask>
@@ -627,7 +632,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="closeButton" destination="jD3-d2-yTG" id="Ejm-hM-vA7"/>
-                        <outlet property="closeButtonImageView" destination="TkE-Yp-Y2I" id="zkl-JK-Zve"/>
+                        <outlet property="closeButtonBackgroundView" destination="eyz-it-IkC" id="c8O-qj-VmJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="50G-3N-0bH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -636,7 +641,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CloseButton2" width="128" height="128"/>
         <image name="LocationOrange" width="96" height="128"/>
         <image name="休闲区" width="75" height="67"/>
         <image name="免费wifi" width="75" height="67"/>

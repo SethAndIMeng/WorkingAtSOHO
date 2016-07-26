@@ -8,12 +8,14 @@
 
 import UIKit
 import WebKit
+import WebViewJavascriptBridge
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, WKNavigationDelegate {
 
     weak var webView: WKWebView! = nil
+    weak var webViewBridge: WKWebViewJavascriptBridge! = nil
+    @IBOutlet weak var closeButtonBackgroundView: UIView!
     @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var closeButtonImageView: UIImageView!
     
     //共享的WKWebViewConfiguration
     static var defaultConfiguration: WKWebViewConfiguration {
@@ -24,9 +26,18 @@ class LoginViewController: UIViewController {
             static var configuration: WKWebViewConfiguration! = nil
             static var defaultOnceToken = dispatch_once_t(0)
         }
+        func addUserScriptToUserContentController(userContentController: WKUserContentController) {
+            if let jsHandler = try? (String(contentsOfURL: NSBundle.mainBundle().URLForResource("readCookie", withExtension: "js")!, encoding: NSUTF8StringEncoding) as String) {
+                let jsScript = WKUserScript(source: jsHandler, injectionTime: .AtDocumentEnd, forMainFrameOnly: false)
+                userContentController.addUserScript(jsScript)
+            }
+        }
+        
         dispatch_once(&Static.defaultOnceToken) {
-            Static.configuration = WKWebViewConfiguration()
-            Static.configuration.processPool = WKProcessPool()
+            let configuration = WKWebViewConfiguration()
+            addUserScriptToUserContentController(configuration.userContentController)
+            configuration.processPool = WKProcessPool()
+            Static.configuration = configuration
         }
         return Static.configuration
     }
@@ -34,8 +45,12 @@ class LoginViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        let strongWebView = WKWebView(frame: CGRectZero, configuration: self.dynamicType.defaultConfiguration)
+        let defaultConfiguration = self.dynamicType.defaultConfiguration
+        let strongWebView = WKWebView(frame: CGRectZero, configuration: defaultConfiguration)
         webView = strongWebView
+        webViewBridge = WKWebViewJavascriptBridge(forWebView: webView)
+        
+        webView.navigationDelegate = self
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -51,8 +66,10 @@ class LoginViewController: UIViewController {
             view.addConstraint(constraint2)
         #endif
         
+        view.bringSubviewToFront(closeButtonBackgroundView)
+        closeButton.backgroundColor = UIColor.clearColor()
+        closeButton.setBackgroundImage(UIImage(named: "CloseButton2"), forState: .Normal)
         view.bringSubviewToFront(closeButton)
-        view.bringSubviewToFront(closeButtonImageView)
         
         if let url = NSURL(string: LoginUrl) {
             webView.loadRequest(NSURLRequest(URL: url))
@@ -63,6 +80,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,11 +99,63 @@ class LoginViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+        
+        if let url = navigationAction.request.URL {
+            var policy = WKNavigationActionPolicy.Allow
+            let urlString = url.absoluteString
+            if nil != urlString.rangeOfString(LoginUrl, options: .CaseInsensitiveSearch)  {
+                //为登录页
+                
+            } else if nil != urlString.rangeOfString(RegisterUrl, options: .CaseInsensitiveSearch) {
+                //注册页
+            } else {
+                webView.evaluateJavaScript("seth_get3QUserIdentity()", completionHandler: { (result, error) in
+                    if let result = result as? [String: String] {
+                        if let token = result["token"] {
+                            SOHO3Q_USER_TOKEN = token
+                            #if DEBUG
+                                UIAlertView(title: "token", message: "\(token)", delegate: nil, cancelButtonTitle: "OK").show()
+                            #endif
+                        }
+                        if let sid = result["sid"] {
+                            SOHO3Q_USER_SID = sid
+                            #if DEBUG
+                                UIAlertView(title: "sid", message: "\(sid)", delegate: nil, cancelButtonTitle: "OK").show()
+                            #endif
+                        }
+                        self.dismissViewControllerAnimated(true, completion: {
+                            
+                        })
+                    }
+                })
+                policy = .Cancel
+            }
+            
+            decisionHandler(policy)
+        } else {
+            decisionHandler(.Allow)
+        }
+    }
+    
+    func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
+        decisionHandler(.Allow);
+    }
+    
+    func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+        NSLog("%@-%@", userContentController, message)
+    }
 
     @IBAction func CloseButtonPressed(sender: AnyObject) {
         
         self.dismissViewControllerAnimated(true) { 
             
         }
+    }
+    
+    deinit {
+        webView.UIDelegate = nil
+        webView.navigationDelegate = nil
     }
 }

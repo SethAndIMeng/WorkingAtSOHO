@@ -15,4 +15,9 @@ let AjaxGetProjectList = BaseUrl + "/salesvc/ajax/booking/getprojectlist"
 //图片基地址url
 let ImageBaseUrl = "http://www.soho3q.com/entry/ImgStreamServlet.do?imgPath="
 
-let LoginUrl = BaseUrl + "/user/login.html"
+let LoginUrl = BaseUrl + "/user/login.html" //登录页
+let RegisterUrl = BaseUrl + "/html5/3q-registered.jsp" //注册页
+
+
+var SOHO3Q_USER_TOKEN = ""
+var SOHO3Q_USER_SID = ""

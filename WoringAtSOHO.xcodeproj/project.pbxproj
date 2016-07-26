@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D022E6A1D45B67A002E11B6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D022E691D45B67A002E11B6 /* LoginViewController.swift */; };
+		0D022E6E1D4716F1002E11B6 /* readCookie.js in Resources */ = {isa = PBXBuildFile; fileRef = 0D022E6D1D4716F1002E11B6 /* readCookie.js */; };
 		0D02DF5E1D3730100075596C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D02DF5D1D3730100075596C /* AppDelegate.swift */; };
 		0D02DF631D3730100075596C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D02DF611D3730100075596C /* Main.storyboard */; };
 		0D02DF651D3730100075596C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D02DF641D3730100075596C /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		0D022E691D45B67A002E11B6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0D022E6D1D4716F1002E11B6 /* readCookie.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = readCookie.js; sourceTree = "<group>"; };
 		0D02DF5A1D3730100075596C /* WoringAtSOHO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WoringAtSOHO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D02DF5D1D3730100075596C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D02DF621D3730100075596C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				0DDAFFB81D3F3EC50006F238 /* CopyableLabel.swift */,
+				0D022E6D1D4716F1002E11B6 /* readCookie.js */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D02DF681D3730100075596C /* LaunchScreen.storyboard in Resources */,
+				0D022E6E1D4716F1002E11B6 /* readCookie.js in Resources */,
 				0D02DF651D3730100075596C /* Assets.xcassets in Resources */,
 				0D02DF631D3730100075596C /* Main.storyboard in Resources */,
 				0D0C2DF01D378B0E007BC936 /* SOHOProjectListSample.json in Resources */,
