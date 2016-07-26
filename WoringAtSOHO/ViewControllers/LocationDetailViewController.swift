@@ -8,12 +8,15 @@
 
 import UIKit
 import CVCalendar
+import Alamofire
 
 let CGFloatEpsilon = CGFloat(0.001)
 
 class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCalendarViewDelegate, CVCalendarMenuViewDelegate
 {
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var priceLabel2: UILabel!
+    @IBOutlet weak var priceLabel3: UILabel!
     @IBOutlet weak var mainContentView: UIView!
     @IBOutlet weak var customImageScrollView: UIScrollView!
     @IBOutlet weak var customImagePageControl: UIPageControl!
@@ -41,6 +44,10 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
         scrollView.contentInset = UIEdgeInsetsZero
         priceLabel.layer.cornerRadius = 5
         priceLabel.layer.masksToBounds = true
+        priceLabel2.layer.cornerRadius = 5
+        priceLabel2.layer.masksToBounds = true
+        priceLabel3.layer.cornerRadius = 5
+        priceLabel3.layer.masksToBounds = true
         if let title = projectInfo?.projectName {
             self.title = title
         }
@@ -89,6 +96,18 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
             calendarMenuView.backgroundColor = UIColor.clearColor()
             calendarView.backgroundColor = UIColor.clearColor()
         }
+        
+        ProxyAccountLogin { succeed in
+//            if succeed {
+//                ProxyCreateOrder(.RMB99)
+//            }
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -100,7 +119,6 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
     }
 
     override func didReceiveMemoryWarning() {

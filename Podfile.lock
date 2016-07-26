@@ -7,6 +7,7 @@ PODS:
   - CVCalendar (1.2.9)
   - Kingfisher (2.4.2)
   - ObjectMapper (1.3.0)
+  - PKHUD (3.2.1)
   - SwiftyJSON (2.3.2)
   - WebViewJavascriptBridge (5.0.5)
 
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - CGRectExtensions
   - CVCalendar (~> 1.2.9)
   - Kingfisher (~> 2.4)
+  - PKHUD
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
   - WebViewJavascriptBridge (~> 5.0)
 
@@ -34,9 +36,10 @@ SPEC CHECKSUMS:
   CVCalendar: 0799256e0bc3b43e83b7e86c0729ce9ff0624cb6
   Kingfisher: 05bf8d04408aaa70fcd2c8c81b9f1d0f1ad313dd
   ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
+  PKHUD: 001c11518f125a273ddf026bcc64918423744ea2
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
   WebViewJavascriptBridge: a4d502315f1b8d9a51cd6a9174147ed567ec3bc5
 
-PODFILE CHECKSUM: 63028573a2b7e3e4b5ae5c7484b0181623cb3ca4
+PODFILE CHECKSUM: c3ab376f666907f4bf57ebce930e19323e3a0473
 
 COCOAPODS: 1.0.1

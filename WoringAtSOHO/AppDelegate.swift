@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             #endif
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, sleepTime), dispatch_get_main_queue(), { [weak self] in
                 
+                let barAppearace = UIBarButtonItem.appearance()
+                barAppearace.setBackButtonTitlePositionAdjustment(UIOffsetMake(0, -60), forBarMetrics:UIBarMetrics.Default)
+                
                 let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
                 let mainViewController = storyboard.instantiateInitialViewController()
                 if let window = self?.window {

@@ -8,14 +8,13 @@
 
 import UIKit
 import WebKit
-import WebViewJavascriptBridge
+import PKHUD
 
 import Alamofire
 
 class LoginViewController: UIViewController, WKNavigationDelegate {
 
     weak var webView: WKWebView! = nil
-    weak var webViewBridge: WKWebViewJavascriptBridge! = nil
     @IBOutlet weak var closeButtonBackgroundView: UIView!
     @IBOutlet weak var closeButton: UIButton!
     
@@ -50,7 +49,6 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
         let defaultConfiguration = self.dynamicType.defaultConfiguration
         let strongWebView = WKWebView(frame: CGRectZero, configuration: defaultConfiguration)
         webView = strongWebView
-        webViewBridge = WKWebViewJavascriptBridge(forWebView: webView)
         
         webView.navigationDelegate = self
         view.addSubview(webView)
@@ -115,9 +113,13 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
             } else {
                 webView.evaluateJavaScript("seth_get3QUserIdentity()", completionHandler: { (result, error) in
                     if let result = result as? [String: String] {
-                        if let token = result["token"], sid = result["sid"] {
-                            SOHO3Q_USER_TOKEN = token
-                            SOHO3Q_USER_SID = sid
+                        if let token = result["token"], sid = result["sid"], user_phone = result["user_phone"] {
+                            SOHO3Q_COOKIE_TOKEN = token
+                            SOHO3Q_COOKIE_SID = sid
+                            SOHO3Q_COOKIE_USER_PHONE = user_phone
+                            
+                            PKHUD.sharedHUD.contentView = PKHUDProgressView()
+                            PKHUD.sharedHUD.show()
                             
                             Alamofire.request(.POST, GetUserInfoAPIUrl,
                                 parameters: nil,
@@ -136,8 +138,9 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
                                         guard let strongSelf = self else {
                                             return
                                         }
-                                        var title = "非会员"
-                                        var message = "去成为会员"
+                                        var type = Soho3QProxyOrderType.RMB99
+                                        var title = "不是会员"
+                                        var message = "走￥99流程"
                                         if let result = response.result.value?.result {
                                             if let memberType = result.memberType {
                                                 switch memberType {
@@ -149,21 +152,38 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
                                                     //已经是会员
                                                     title = "已经是会员"
                                                     message = "走￥120流程"
+                                                    type = .RMB120
                                                     break;
                                                     
                                                 default:
                                                     //不是会员
-                                                    title = "不是会员"
-                                                    message = "走￥99流程"
                                                     break;
                                                 }
                                             }
-                                            strongSelf.dismissViewControllerAnimated(true, completion: {
-                                                UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "OK").show()
-                                            })
+                                            
+                                            ProxyAccountLogin { succeed in
+                                                if succeed {
+                                                    ProxyCreateOrder(type) { succeed in
+                                                        if succeed {
+                                                            PKHUD.sharedHUD.hide(true, completion: { success in
+                                                                strongSelf.dismissViewControllerAnimated(true, completion: {
+                                                                    UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "确定").show()
+                                                                })
+                                                            })
+                                                        } else {
+                                                            PKHUD.sharedHUD.hide(false)
+                                                        }
+                                                    }
+                                                } else {
+                                                    PKHUD.sharedHUD.hide(false)
+                                                }
+                                            }
+                                        } else {
+                                            PKHUD.sharedHUD.hide(false)
                                         }
                                         break
                                     case .Failure:
+                                        PKHUD.sharedHUD.hide(false)
                                         break
                                     }
                                 })

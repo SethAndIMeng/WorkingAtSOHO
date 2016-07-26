@@ -8,8 +8,10 @@ function seth_cookieWithName(name) {
 function seth_get3QUserIdentity() {
     var token = seth_cookieWithName("token");
     var sid = seth_cookieWithName("sid");
+    var user_phone = seth_cookieWithName("user_phone");
     return {
         "sid": sid,
-        "token": token
+        "token": token,
+        "user_phone": user_phone
     }
 }

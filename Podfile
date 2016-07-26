@@ -12,6 +12,7 @@ target 'WoringAtSOHO' do
     pod 'Kingfisher', '~> 2.4'
     pod 'WebViewJavascriptBridge', '~> 5.0'
     pod 'CVCalendar', '~> 1.2.9'
+    pod "PKHUD"
 #    pod 'DZNEmptyDataSet' #空列表显示
     pod 'CGRectExtensions'
 end
