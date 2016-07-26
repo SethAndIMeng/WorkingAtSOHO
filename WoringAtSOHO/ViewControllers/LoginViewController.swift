@@ -139,8 +139,8 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
                                             return
                                         }
                                         var type = Soho3QProxyOrderType.RMB99
-                                        var title = "不是会员"
-                                        var message = "走￥99流程"
+//                                        var title = "不是会员"
+//                                        var message = "走￥99流程"
                                         if let result = response.result.value?.result {
                                             if let memberType = result.memberType {
                                                 switch memberType {
@@ -150,8 +150,8 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
                                                     fallthrough
                                                 case "Both":
                                                     //已经是会员
-                                                    title = "已经是会员"
-                                                    message = "走￥120流程"
+//                                                    title = "已经是会员"
+//                                                    message = "走￥120流程"
                                                     type = .RMB120
                                                     break;
                                                     
@@ -167,7 +167,7 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
                                                         if succeed {
                                                             PKHUD.sharedHUD.hide(true, completion: { success in
                                                                 strongSelf.dismissViewControllerAnimated(true, completion: {
-                                                                    UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "确定").show()
+//                                                                    UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: "确定").show()
                                                                 })
                                                             })
                                                         } else {

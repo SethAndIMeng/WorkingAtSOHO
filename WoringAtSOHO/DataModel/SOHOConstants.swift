@@ -145,6 +145,7 @@ func ProxyCreateOrder(type: Soho3QProxyOrderType, callbackHandler: ((Bool)->())?
                         let item = items[0]
                         if let name = item.name {
                             print("成功代客下单: \(name)")
+                            UIAlertView(title: "下单成功", message: "成功代\(result.mobile)下单: \(result.orderId)-\(name)", delegate: nil, cancelButtonTitle: "确定").show()
                             succeed = true
                         }
                     }
