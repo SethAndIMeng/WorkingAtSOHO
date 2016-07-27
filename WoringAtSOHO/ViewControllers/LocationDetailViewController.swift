@@ -9,6 +9,7 @@
 import UIKit
 import CVCalendar
 import Alamofire
+import PKHUD
 
 let CGFloatEpsilon = CGFloat(0.001)
 
@@ -28,6 +29,8 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
     @IBOutlet weak var yearMonthLabel: UILabel!
     @IBOutlet weak var calendarMenuView: CVCalendarMenuView!
     @IBOutlet weak var calendarView: CVCalendarView!
+    
+    @IBOutlet weak var reservationButton: UIButton!
     
     var pageNumber = 0
     
@@ -126,16 +129,14 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        super.prepareForSegue(segue, sender: sender)
     }
-    */
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView == customImageScrollView {
@@ -181,6 +182,41 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
     func didSelectDayView(dayView: DayView, animationDidFinish: Bool) {
         let date = dayView.date
         NSLog("%@-%@", date, animationDidFinish)
+    }
+    
+    @IBAction func reservationButtonPressed(sender: AnyObject) {
+        let sid = SOHO3Q_COOKIE_SID
+        let token = SOHO3Q_COOKIE_TOKEN
+        if NSDate().compare(SOHO3Q_COOKIE_EXPIRE_DATE) == .OrderedAscending &&
+            sid.characters.count > 0 &&
+            token.characters.count > 0 {
+            //当前时间 小于 过期时间
+            PKHUD.sharedHUD.contentView = PKHUDProgressView()
+            PKHUD.sharedHUD.show()
+            
+            ProxyCreateOrderProcedure(sid, token: token) { succeed, result in
+                if succeed {
+                    PKHUD.sharedHUD.hide(true, completion: { success in
+                        UIAlertView.soho3q_showOrderAlert(result)
+                        let sb = UIStoryboard(name: "Main", bundle: nil)
+                        if let paymentVC = sb.instantiateViewControllerWithIdentifier("PaymentViewController") as? PaymentViewController {
+                            paymentVC.couponOrder = result
+                            self.navigationController?.pushViewController(paymentVC, animated: true)
+                        }
+                    })
+                } else {
+                    PKHUD.sharedHUD.hide(false)
+                }
+            }
+        } else {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let loginVC = sb.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {
+                loginVC.locationDetailVC = self
+                self.navigationController?.presentViewController(loginVC, animated: true, completion: {
+                })
+            }
+            
+        }
     }
     
     deinit {

@@ -23,12 +23,13 @@ class ModelCouponOrder: Mappable {
     var items: [ModelCouponItem]? = nil
     var mobile: String? = nil
     var orderId: Int? = nil
-    var originalPrice: Float? = nil
     var paymentBillId: String? = nil
     var paymentOrderId: String? = nil
     var paymentOrderNum: String? = nil
     var status: Int? = nil
-    var totalPrice: Float? = nil
+    
+    var originalPrice: NSDecimalNumber? = nil
+    var totalPrice: NSDecimalNumber? = nil
     
     required init?(_ map: Map) {
         
@@ -39,12 +40,13 @@ class ModelCouponOrder: Mappable {
         items <- map["items"]
         mobile <- map["mobile"]
         orderId <- map["orderId"]
-        originalPrice <- map["originalPrice"]
         paymentBillId <- map["paymentBillId"]
         paymentOrderId <- map["paymentOrderId"]
         paymentOrderNum <- map["paymentOrderNum"]
         status <- map["status"]
-        totalPrice <- map["totalPrice"]
+        
+        originalPrice <- (map["originalPrice"], NSDecimalNumberTransform())
+        totalPrice <- (map["totalPrice"], NSDecimalNumberTransform())
     }
 }
 
@@ -54,7 +56,7 @@ class ModelCouponItem: Mappable {
     var couponType: Int? = nil
     var giftCouponId: Int? = nil
     var name: String? = nil
-    var price: Float? = nil
+    var price: NSDecimalNumber? = nil
     var productType: Int? = nil
     var unit: String? = nil
     
@@ -68,7 +70,7 @@ class ModelCouponItem: Mappable {
         couponType <- map["couponType"]
         giftCouponId <- map["giftCouponId"]
         name <- map["name"]
-        price <- map["price"]
+        price <- (map["price"], NSDecimalNumberTransform())
         productType <- map["productType"]
         unit <- map["unit"]
     }

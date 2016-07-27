@@ -13,5 +13,11 @@ function seth_get3QUserIdentity() {
         "sid": sid,
         "token": token,
         "user_phone": user_phone
-    }
+    };
+}
+
+function seth_hideProxyInfo() {
+    $("#salerInfo > .paimaizf-c-xx").hide();
+    $("#salerInfo > .paimaizf-c-title").not(".agreement").hide();
+    return true
 }

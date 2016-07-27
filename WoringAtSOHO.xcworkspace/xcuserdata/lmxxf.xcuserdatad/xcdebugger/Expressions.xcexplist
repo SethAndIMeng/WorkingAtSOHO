@@ -3,7 +3,18 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "(ProxyCreateOrder(Soho3QProxyOrderType, callbackHandler : (Bool) -&gt; ()?) -&gt; ()).(closure #1):SOHOConstants.swift">
+      </ContextState>
+      <ContextState
          contextName = "LocationDetailViewController.scrollViewDidScroll(UIScrollView) -&gt; ():LocationDetailViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ModelCouponOrder.mapping(Map) -&gt; ():ModelCreateCouponOrder.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "map[&quot;totalPrice&quot;]">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

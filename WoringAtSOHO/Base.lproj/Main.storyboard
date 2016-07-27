@@ -614,7 +614,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="0ab-jr-5EB" kind="presentation" id="vuy-gi-e6a"/>
+                                    <action selector="reservationButtonPressed:" destination="fvs-KK-1Ad" eventType="touchUpInside" id="UK9-Qb-85d"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -643,6 +643,7 @@
                         <outlet property="priceLabel2" destination="7PU-hm-FRE" id="eCP-ZK-MJW"/>
                         <outlet property="priceLabel3" destination="4mJ-R0-Hq9" id="DSA-gO-yIT"/>
                         <outlet property="projectDescription" destination="tCs-Iy-6f4" id="FMZ-fk-J8A"/>
+                        <outlet property="reservationButton" destination="lpk-Mo-xd4" id="XAs-Wi-dMb"/>
                         <outlet property="scrollView" destination="aZM-k9-yMD" id="fWW-z3-I9D"/>
                         <outlet property="yearMonthLabel" destination="Lnf-nX-A8c" id="9K8-SR-hSD"/>
                     </connections>
@@ -654,7 +655,7 @@
         <!--Login View Controller-->
         <scene sceneID="hk3-yJ-Jn1">
             <objects>
-                <viewController id="0ab-jr-5EB" customClass="LoginViewController" customModule="WoringAtSOHO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="0ab-jr-5EB" customClass="LoginViewController" customModule="WoringAtSOHO" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XUt-jj-hlM"/>
                         <viewControllerLayoutGuide type="bottom" id="wlT-Li-nbA"/>
@@ -664,7 +665,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eyz-it-IkC" userLabel="CloseButtonBackground">
-                                <rect key="frame" x="10.5" y="4.5" width="35" height="35"/>
+                                <rect key="frame" x="10.5" y="24.5" width="35" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Swm-10-1kP"/>
@@ -672,7 +673,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jD3-d2-yTG" userLabel="CloseButton">
-                                <rect key="frame" x="6" y="0.0" width="44" height="44"/>
+                                <rect key="frame" x="6" y="20" width="44" height="44"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="SDk-a2-QEr"/>
@@ -682,9 +683,6 @@
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="CloseButtonPressed:" destination="0ab-jr-5EB" eventType="touchUpInside" id="Iqn-lR-wlc"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -706,6 +704,65 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="50G-3N-0bH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="958.5" y="4.5"/>
+        </scene>
+        <!--Payment View Controller-->
+        <scene sceneID="AQU-4A-GpO">
+            <objects>
+                <viewController storyboardIdentifier="PaymentViewController" id="5I8-uN-IzY" customClass="PaymentViewController" customModule="WoringAtSOHO" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6sa-sm-DXx"/>
+                        <viewControllerLayoutGuide type="bottom" id="kkz-iH-NkE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vns-4z-O1n">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="irg-dW-Z8L" userLabel="CloseButtonBackground">
+                                <rect key="frame" x="10.5" y="24.5" width="35" height="35"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="fvd-Ac-Xia"/>
+                                    <constraint firstAttribute="height" constant="35" id="vJZ-kh-59f"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uaQ-Oc-8gs" userLabel="CloseButton">
+                                <rect key="frame" x="6" y="20" width="44" height="44"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="9nw-zf-SrB"/>
+                                    <constraint firstAttribute="width" constant="44" id="TpV-kk-GFK"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="uaQ-Oc-8gs" firstAttribute="leading" secondItem="vns-4z-O1n" secondAttribute="leadingMargin" constant="-15" id="6s6-0K-KNT"/>
+                            <constraint firstItem="uaQ-Oc-8gs" firstAttribute="top" secondItem="6sa-sm-DXx" secondAttribute="bottom" id="Yi3-0c-34g"/>
+                            <constraint firstItem="uaQ-Oc-8gs" firstAttribute="top" secondItem="vns-4z-O1n" secondAttribute="topMargin" constant="5" id="a2x-6t-vas"/>
+                            <constraint firstItem="irg-dW-Z8L" firstAttribute="centerX" secondItem="uaQ-Oc-8gs" secondAttribute="centerX" id="drT-ts-gaR"/>
+                            <constraint firstItem="uaQ-Oc-8gs" firstAttribute="leading" secondItem="vns-4z-O1n" secondAttribute="leadingMargin" constant="-10" id="lIl-5t-7Ds"/>
+                            <constraint firstItem="irg-dW-Z8L" firstAttribute="centerY" secondItem="uaQ-Oc-8gs" secondAttribute="centerY" id="x2w-7Q-gG6"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="6s6-0K-KNT"/>
+                                <exclude reference="a2x-6t-vas"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="closeButton" destination="uaQ-Oc-8gs" id="BEy-dZ-L7J"/>
+                        <outlet property="closeButtonBackgroundView" destination="irg-dW-Z8L" id="Wd2-k1-R1q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lSA-Io-Stt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="949.5" y="-816.5"/>
         </scene>
     </scenes>
     <resources>
