@@ -718,7 +718,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="irg-dW-Z8L" userLabel="CloseButtonBackground">
-                                <rect key="frame" x="10.5" y="24.5" width="35" height="35"/>
+                                <rect key="frame" x="17.5" y="24.5" width="35" height="35"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="fvd-Ac-Xia"/>
@@ -726,11 +726,11 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uaQ-Oc-8gs" userLabel="CloseButton">
-                                <rect key="frame" x="6" y="20" width="44" height="44"/>
+                                <rect key="frame" x="1" y="20" width="68" height="44"/>
                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="9nw-zf-SrB"/>
-                                    <constraint firstAttribute="width" constant="44" id="TpV-kk-GFK"/>
+                                    <constraint firstAttribute="width" constant="68" id="TpV-kk-GFK"/>
                                 </constraints>
                                 <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal">
@@ -744,7 +744,7 @@
                             <constraint firstItem="uaQ-Oc-8gs" firstAttribute="top" secondItem="6sa-sm-DXx" secondAttribute="bottom" id="Yi3-0c-34g"/>
                             <constraint firstItem="uaQ-Oc-8gs" firstAttribute="top" secondItem="vns-4z-O1n" secondAttribute="topMargin" constant="5" id="a2x-6t-vas"/>
                             <constraint firstItem="irg-dW-Z8L" firstAttribute="centerX" secondItem="uaQ-Oc-8gs" secondAttribute="centerX" id="drT-ts-gaR"/>
-                            <constraint firstItem="uaQ-Oc-8gs" firstAttribute="leading" secondItem="vns-4z-O1n" secondAttribute="leadingMargin" constant="-10" id="lIl-5t-7Ds"/>
+                            <constraint firstItem="uaQ-Oc-8gs" firstAttribute="leading" secondItem="vns-4z-O1n" secondAttribute="leadingMargin" constant="-15" id="lIl-5t-7Ds"/>
                             <constraint firstItem="irg-dW-Z8L" firstAttribute="centerY" secondItem="uaQ-Oc-8gs" secondAttribute="centerY" id="x2w-7Q-gG6"/>
                         </constraints>
                         <variation key="default">

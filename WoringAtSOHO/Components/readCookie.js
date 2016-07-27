@@ -23,3 +23,8 @@ function seth_hideProxyInfo() {
     
     return true
 }
+
+function seth_removeRightTopBarButton() {
+    $(".zhcomeinw").hide()
+    return true;
+}

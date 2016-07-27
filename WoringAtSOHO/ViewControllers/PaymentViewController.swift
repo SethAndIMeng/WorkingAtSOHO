@@ -118,11 +118,17 @@ class PaymentViewController: WebViewController {
                 //为准备支付页
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC / 3/* 三分之一秒 */)), dispatch_get_main_queue(), {
                     webView.evaluateJavaScript("seth_hideProxyInfo()", completionHandler: { (result, error) in
-                        print("\(result)")
+                        print("seth_hideProxyInfo:\(result)")
                     })
                 })
             }
         }
+        //所有页面都需要去掉右上角的按钮
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC / 3/* 三分之一秒 */)), dispatch_get_main_queue(), {
+            webView.evaluateJavaScript("seth_removeRightTopBarButton()", completionHandler: { (result, error) in
+                print("seth_removeRightTopBarButton:\(result)")
+            })
+        })
     }
     
     func CloseButtonPressed(sender: AnyObject) {
