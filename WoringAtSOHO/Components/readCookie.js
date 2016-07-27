@@ -17,7 +17,9 @@ function seth_get3QUserIdentity() {
 }
 
 function seth_hideProxyInfo() {
-    $("#salerInfo > .paimaizf-c-xx").hide();
-    $("#salerInfo > .paimaizf-c-title").not(".agreement").hide();
+    $("#salerInfo > .paimaizf-c-xx").hide(); //隐藏销售信息
+    $("#salerInfo > .paimaizf-c-title").not(".agreement").hide(); //隐藏销售标题
+    $("#userinfo > .paimaizf-c-title").html("请确认您的信息")
+    
     return true
 }

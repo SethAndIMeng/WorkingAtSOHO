@@ -116,8 +116,10 @@ class PaymentViewController: WebViewController {
         if let urlString = currentUrlString {
             if nil != urlString.rangeOfString(PaymentPrepareUrl, options: .CaseInsensitiveSearch)  {
                 //为准备支付页
-                webView.evaluateJavaScript("seth_hideProxyInfo()", completionHandler: { (result, error) in
-                    print("\(result)")
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(NSEC_PER_SEC / 3/* 三分之一秒 */)), dispatch_get_main_queue(), {
+                    webView.evaluateJavaScript("seth_hideProxyInfo()", completionHandler: { (result, error) in
+                        print("\(result)")
+                    })
                 })
             }
         }
