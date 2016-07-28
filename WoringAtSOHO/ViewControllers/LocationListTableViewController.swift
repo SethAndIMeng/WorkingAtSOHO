@@ -49,9 +49,7 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         
         if let infoDictionary = NSBundle.mainBundle().infoDictionary,
             title = infoDictionary["CFBundleDisplayName"] as? String {
-            self.title = "SOHO" + title
-        } else {
-            self.title = "SOHO"
+            self.title = "SOHO3Q" + title
         }
         
         tableView.estimatedRowHeight = 300; // 设置UITableViewCell每行大概多高

@@ -35,7 +35,7 @@ var ProxyPassword: String {
     if TestEnvironment {
         return "123456" //夏辉的测试密码
     } else {
-        return "12345678" //周小洲的正式账户密码
+        return "xiaozhu1983" //周小洲的正式账户密码
     }
 }
 
@@ -54,6 +54,7 @@ let PaymentSucceedUrl = BaseUrl + "/html5/z_success.jsp" //支付成功页面url
 
 //Ajax API
 let AjaxGetProjectListAPIUrl = BaseUrl + "/salesvc/ajax/booking/getprojectlist" //获取所有项目的接口地址
+let AjaxGetProjectAvailableAPIUrl = BaseUrl + "/salesvc/ajax/flexible_station_stats/remains" //获取所有项目的剩余工位数
 let GetUserInfoAPIUrl = BaseUrl + "/my/ajax/member/info" //获取用户信息api地址
 let LoginAPIUrl = BaseUrl + "/my/ajax/login/submit" //登录api地址
 let ProxyCreateCouponOrderAPIUrl = BaseUrl + "/salesvc/ajax/booking/create_coupon_order" //代客下单api地址
@@ -63,6 +64,9 @@ var SOHO3Q_COOKIE_SID = ""
 var SOHO3Q_COOKIE_USER_PHONE = "" //客户的手机号（代客下单ID）
 var SOHO3Q_COOKIE_EXPIRE_DATE = NSDate(timeIntervalSince1970: 0) //当前COOKIE到期时间
 let SOHO3Q_COOKIE_Expire_Time_Interval = NSTimeInterval(60 * 60 * 5) //5小时后过期
+
+var SOHO3Q_USER_RESERVATION_DATE: NSDate? = nil
+var SOHO3Q_USER_RESERVATION_PROJECT: ModelProjectItem? = nil
 
 func ProxyAccountLogin(callbackHandler: ((Bool)->())?) {
     if !(ProxyCookieSid.characters.count > 0 && ProxyCookieToken.characters.count > 0) {

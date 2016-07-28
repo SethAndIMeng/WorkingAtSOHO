@@ -111,6 +111,10 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
         super.viewWillAppear(animated)
         
 //        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+        
+        reservationButton.setTitle("请选择您的入驻办公日期", forState: .Normal)
+        reservationButton.enabled = false
+        reservationButton.backgroundColor = UIColor.darkGrayColor()
     }
     
     override func viewDidLayoutSubviews() {
@@ -179,9 +183,96 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
         return false
     }
     
+    var dateFormatter: NSDateFormatter {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "zh_CN")
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter
+    }
+    
+    var currentProjectAvailableRequest: Request? = nil
     func didSelectDayView(dayView: DayView, animationDidFinish: Bool) {
-        let date = dayView.date
-        NSLog("%@-%@", date, animationDidFinish)
+        
+        if let cvDate = dayView.date, date = cvDate.convertedDate() {
+            NSLog("%@-%@", date, animationDidFinish)
+            
+            if let projectInfo = projectInfo, projectId = projectInfo.projectId {
+                
+                let dateString = dateFormatter.stringFromDate(date)
+                
+                SOHO3Q_USER_RESERVATION_DATE = nil
+                SOHO3Q_USER_RESERVATION_PROJECT = nil
+                if let currentProjectAvailableRequest = currentProjectAvailableRequest {
+                    currentProjectAvailableRequest.cancel()
+                }
+                
+                var isAvailableDay = false
+                let today = NSDate()
+                if today.compare(date) == .OrderedAscending {
+                    isAvailableDay = true
+                } else {
+                    let c0 = NSCalendar.currentCalendar().components([.Era, .Year, .Month, .Day], fromDate: today)
+                    let c1 = NSCalendar.currentCalendar().components([.Era, .Year, .Month, .Day], fromDate: date)
+                    if c0.era == c1.era && c0.year == c1.year && c0.month == c1.month && c0.day == c1.day {
+                        isAvailableDay = true
+                    }
+                }
+                
+                if isAvailableDay {
+                    reservationButton.setTitle("正在检索\(dateString)的工位", forState: .Normal)
+                    reservationButton.enabled = false
+                    reservationButton.backgroundColor = UIColor.darkGrayColor()
+                    
+                    currentProjectAvailableRequest =
+                        Alamofire.request(.GET, AjaxGetProjectAvailableAPIUrl, parameters: ["projectId": projectId, "currentDate": dateString])
+                            .validate()
+                            .responseObject { [weak self] (response: Response<ModelProjectAvailable, NSError>) in
+                                guard let strongSelf = self else {
+                                    return
+                                }
+                                var succeed = false
+                                switch response.result {
+                                case .Success:
+                                    if let result = response.result.value?.result {
+                                        for item in result {
+                                            if let projectId = item.projectId, currentProjectId = projectInfo.projectId {
+                                                if projectId == currentProjectId {
+                                                    if let remains = item.remains {
+                                                        if remains > 0 {
+                                                            succeed = true
+                                                            strongSelf.reservationButton.setTitle("立即预约\(dateString)的工位 (剩余: \(remains))", forState: .Normal)
+                                                            strongSelf.reservationButton.enabled = true
+                                                            strongSelf.reservationButton.backgroundColor = UIColor.orangeColor()
+                                                            SOHO3Q_USER_RESERVATION_DATE = date
+                                                            SOHO3Q_USER_RESERVATION_PROJECT = projectInfo
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    break
+                                    
+                                case .Failure:
+                                    break
+                                }
+                                if !succeed {
+                                    strongSelf.reservationButton.setTitle("无法预约\(dateString)的工位 (剩余: 0)", forState: .Normal)
+                                    strongSelf.reservationButton.enabled = false
+                                    strongSelf.reservationButton.backgroundColor = UIColor.darkGrayColor()
+                                }
+                                strongSelf.currentProjectAvailableRequest = nil
+                                
+                    }
+                } else {
+                    reservationButton.setTitle("请选择今天或未来的日期", forState: .Normal)
+                    reservationButton.enabled = false
+                    reservationButton.backgroundColor = UIColor.darkGrayColor()
+                }
+                
+            }
+        }
+        
     }
     
     @IBAction func reservationButtonPressed(sender: AnyObject) {

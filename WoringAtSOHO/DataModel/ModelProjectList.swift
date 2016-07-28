@@ -81,3 +81,36 @@ class ModelImagePath: Mappable {
         imgPath <- map["imgPath"]
     }
 }
+
+class ModelProjectAvailable: ModelSOHOApi {
+    
+    var result: [ModelProjectAvailableItem]?
+    
+    required init?(_ map: Map) {
+        super.init(map)
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map)
+        result <- map["result"]
+    }
+}
+
+class ModelProjectAvailableItem: Mappable {
+    
+    var occupied: Int? = nil
+    var projectId: String? = nil
+    var remains: Int? = nil
+    var total: Int? = nil
+    
+    required init?(_ map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        occupied <- map["occupied"]
+        projectId <- map["projectId"]
+        remains <- map["remains"]
+        total <- map["total"]
+    }
+}

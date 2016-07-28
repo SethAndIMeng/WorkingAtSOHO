@@ -20,9 +20,14 @@ class PaymentViewController: WebViewController {
         super.viewDidLoad()
         
         view.bringSubviewToFront(closeButtonBackgroundView)
-        closeButtonBackgroundView.hidden = true
+        closeButtonBackgroundView.hidden = false
+        closeButtonBackgroundView.backgroundColor = UIColor.whiteColor()
+        closeButtonBackgroundView.layer.cornerRadius = 5
+        closeButtonBackgroundView.layer.masksToBounds = true
+        
         closeButton.backgroundColor = UIColor.clearColor()
-        closeButton.setBackgroundImage(UIImage(named: "GoBackButton"), forState: .Normal)
+        closeButton.setImage(UIImage(named: "GoBackButton"), forState: .Normal)
+        closeButton.imageView?.contentMode = .ScaleAspectFit
         view.bringSubviewToFront(closeButton)
         closeButton.addTarget(self, action: #selector(CloseButtonPressed), forControlEvents: .TouchUpInside)
         
