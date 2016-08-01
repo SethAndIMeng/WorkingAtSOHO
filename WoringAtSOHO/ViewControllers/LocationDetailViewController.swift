@@ -183,13 +183,6 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
         return false
     }
     
-    var dateFormatter: NSDateFormatter {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "zh_CN")
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter
-    }
-    
     var currentProjectAvailableRequest: Request? = nil
     func didSelectDayView(dayView: DayView, animationDidFinish: Bool) {
         
@@ -198,7 +191,7 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
             
             if let projectInfo = projectInfo, projectId = projectInfo.projectId {
                 
-                let dateString = dateFormatter.stringFromDate(date)
+                let dateString = date.S3_dateString01
                 
                 SOHO3Q_USER_RESERVATION_DATE = nil
                 SOHO3Q_USER_RESERVATION_PROJECT = nil
@@ -281,32 +274,106 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
         if NSDate().compare(SOHO3Q_COOKIE_EXPIRE_DATE) == .OrderedAscending &&
             sid.characters.count > 0 &&
             token.characters.count > 0 {
-            //当前时间 小于 过期时间
-            PKHUD.sharedHUD.contentView = PKHUDProgressView()
-            PKHUD.sharedHUD.show()
-            
-            ProxyCreateOrderProcedure(sid, token: token) { succeed, result in
-                if succeed {
-                    PKHUD.sharedHUD.hide(true, completion: { success in
-                        UIAlertView.soho3q_showOrderAlert(result)
-                        let sb = UIStoryboard(name: "Main", bundle: nil)
-                        if let paymentVC = sb.instantiateViewControllerWithIdentifier("PaymentViewController") as? PaymentViewController {
-                            paymentVC.couponOrder = result
-                            self.navigationController?.pushViewController(paymentVC, animated: true)
-                        }
-                    })
-                } else {
-                    PKHUD.sharedHUD.hide(false)
-                }
-            }
+            //已经登录，且 当前时间 小于 过期时间，则跳过登录流程
+            loginSucceedProcedure(true)
         } else {
             let sb = UIStoryboard(name: "Main", bundle: nil)
             if let loginVC = sb.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {
-                loginVC.locationDetailVC = self
+                loginVC.loginSucceedCallback = {
+                    [weak self] succeed in
+                    self?.loginSucceedProcedure(succeed)
+                }
                 self.navigationController?.presentViewController(loginVC, animated: true, completion: {
                 })
             }
+        }
+    }
+    
+    func loginSucceedProcedure(succeed: Bool) {
+        
+        if succeed {
+            let sid = SOHO3Q_COOKIE_SID
+            let token = SOHO3Q_COOKIE_TOKEN
             
+            PKHUD.sharedHUD.contentView = PKHUDProgressView()
+            PKHUD.sharedHUD.show()
+            
+            var isCouponAvailable = false
+            Alamofire.request(.GET, AjaxGetUserCouponAPIUrl, parameters: nil, encoding: .URL,
+                headers: [
+                    "Accept": "application/json",
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Accept-Encoding": "gzip, deflate",
+                    "Cookie": "sid=\(sid); token=\(token)"])
+                .validate()
+                .responseObject(completionHandler: { [weak self] (response: Response<ModelGetMyCouponsResponse, NSError>) in
+                    switch response.result {
+                    case .Success:
+                        if let result = response.result.value?.result {
+                            for item in result {
+                                if item.productType == "OPEN_STATION" && item.availableCount > 0 {
+                                    isCouponAvailable = true
+                                }
+                            }
+                        }
+                        break
+                    case .Failure:
+                        break
+                    }
+                    if isCouponAvailable {
+                        //直接预约工位
+                        PKHUD.sharedHUD.hide(true, completion: {[weak self] _ in
+                            self?.paymentDoneProcedure(true)
+                        })
+                    } else {
+                        //先创建订单，让用户支付支付买券再预约
+                        ProxyCreateOrderProcedure(sid, token: token) { [weak self] succeed, result in
+                            guard let strongSelf = self else {
+                                return
+                            }
+                            if succeed {
+                                PKHUD.sharedHUD.hide(true, completion: { _ in
+                                    let sb = UIStoryboard(name: "Main", bundle: nil)
+                                    if let paymentVC = sb.instantiateViewControllerWithIdentifier("PaymentViewController") as? PaymentViewController {
+                                        paymentVC.couponOrder = result
+                                        paymentVC.paymentDoneCallback = { [weak self] succeed in
+                                            self?.paymentDoneProcedure(succeed)
+                                        }
+                                        strongSelf.navigationController?.pushViewController(paymentVC, animated: true)
+                                    }
+                                })
+                            } else {
+                                PKHUD.sharedHUD.hide(false)
+                            }
+                        }
+                    }
+                })
+        } else {
+            UIAlertView(title: "登录失败", message: "请尝试重新登录", delegate: nil, cancelButtonTitle: "确定").show()
+        }
+    }
+    
+    func paymentDoneProcedure(succeed: Bool) {
+        if succeed {
+            if let project = SOHO3Q_USER_RESERVATION_PROJECT, date = SOHO3Q_USER_RESERVATION_DATE {
+                
+                PKHUD.sharedHUD.contentView = PKHUDProgressView()
+                PKHUD.sharedHUD.show()
+                
+                SOHO3Q_USER_API
+                    .confirmStationReservation(project, reservationDate: date) { succeed, result in
+                        PKHUD.sharedHUD.hide(true, completion: { _ in
+                            if succeed {
+                                UIAlertView(title: "兑换成功", message: "兑换了工位\(result?.billId)", delegate: nil, cancelButtonTitle: "确定").show()
+                            } else {
+                                UIAlertView(title: "兑换失败", message: "当前工位已经预约光了，请您预约其它时间地点的工位", delegate: nil, cancelButtonTitle: "确定").show()
+                            }
+                        })
+                }
+            }
+
+        } else {
+            UIAlertView(title: "支付失败", message: "请重新预约", delegate: nil, cancelButtonTitle: "确定").show()
         }
     }
     

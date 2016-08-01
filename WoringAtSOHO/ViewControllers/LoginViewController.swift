@@ -14,10 +14,10 @@ import Alamofire
 
 class LoginViewController: WebViewController {
     
-    weak var locationDetailVC: LocationDetailViewController? = nil
-    
     @IBOutlet weak var closeButtonBackgroundView: UIView! //只是为了补充白色
     @IBOutlet weak var closeButton: UIButton!
+    
+    var loginSucceedCallback: ((succeed: Bool) -> ())? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,29 +56,9 @@ class LoginViewController: WebViewController {
                             SOHO3Q_COOKIE_USER_PHONE = user_phone
                             SOHO3Q_COOKIE_EXPIRE_DATE = NSDate(timeIntervalSinceNow: SOHO3Q_COOKIE_Expire_Time_Interval)
                             
-                            PKHUD.sharedHUD.contentView = PKHUDProgressView()
-                            PKHUD.sharedHUD.show()
-                            
-                            ProxyCreateOrderProcedure(sid, token: token) { [weak self] succeed, result in
-                                guard let strongSelf = self else {
-                                    return
-                                }
-                                if succeed {
-                                    PKHUD.sharedHUD.hide(true, completion: { success in
-                                        strongSelf.dismissViewControllerAnimated(true, completion: {
-                                            UIAlertView.soho3q_showOrderAlert(result)
-                                        })
-                                        if let locationDetailVC = strongSelf.locationDetailVC {
-                                            let sb = UIStoryboard(name: "Main", bundle: nil)
-                                            if let paymentVC = sb.instantiateViewControllerWithIdentifier("PaymentViewController") as? PaymentViewController {
-                                                paymentVC.couponOrder = result
-                                                locationDetailVC.navigationController?.pushViewController(paymentVC, animated: true)
-                                            }
-                                        }
-                                    })
-                                } else {
-                                    PKHUD.sharedHUD.hide(false)
-                                }
+                            self.loginSucceedCallback?(succeed: true)
+                            self.dismissViewControllerAnimated(true) {
+                                self.loginSucceedCallback = nil
                             }
                         }
                         
@@ -96,7 +76,7 @@ class LoginViewController: WebViewController {
     func CloseButtonPressed(sender: AnyObject) {
         
         self.dismissViewControllerAnimated(true) {
-            
+            self.loginSucceedCallback = nil
         }
     }
 }

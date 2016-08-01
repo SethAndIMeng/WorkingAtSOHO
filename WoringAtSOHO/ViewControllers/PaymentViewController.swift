@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import Alamofire
 
 class PaymentViewController: WebViewController {
 
@@ -15,6 +16,9 @@ class PaymentViewController: WebViewController {
     
     @IBOutlet weak var closeButtonBackgroundView: UIView!
     @IBOutlet weak var closeButton: UIButton!
+    
+    var paymentDoneCallback: ((Bool) -> ())? = nil
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -110,8 +114,14 @@ class PaymentViewController: WebViewController {
             if nil != urlString.rangeOfString(PaymentSucceedUrl, options: .CaseInsensitiveSearch) {
                 //支付成功页面
                 decision = .Cancel
-                UIAlertView(title: "支付成功", message: "支付成功了，可以兑换了", delegate: nil, cancelButtonTitle: "确定").show()
+                
+                paymentDoneCallback?(true)
+                paymentDoneCallback = nil
+                
                 self.navigationController?.popViewControllerAnimated(true)
+                
+//                UIAlertView(title: "支付成功", message: "支付成功了，可以兑换了", delegate: nil, cancelButtonTitle: "确定").show()
+                
             }
         }
         decisionHandler(decision)

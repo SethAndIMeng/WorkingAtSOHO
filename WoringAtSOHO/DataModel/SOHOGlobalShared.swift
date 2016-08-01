@@ -51,6 +51,7 @@ let RegisterUrl = BaseUrl + "/html5/3q-registered.jsp" //注册页
 let PaymentFormSubmitUrl = BaseUrl + "/html5/orderPay/orderSubmit.action" //提交支付页面的地址
 let PaymentPrepareUrl = BaseUrl + "/sales/crsoConfirm.html?orderid=" //支付页的前一页地址
 let PaymentSucceedUrl = BaseUrl + "/html5/z_success.jsp" //支付成功页面url
+let MyReservationListUrl = BaseUrl + "/user/station.html#!/list" //我的预约列表
 
 //Ajax API
 let AjaxGetProjectListAPIUrl = BaseUrl + "/salesvc/ajax/booking/getprojectlist" //获取所有项目的接口地址
@@ -58,6 +59,8 @@ let AjaxGetProjectAvailableAPIUrl = BaseUrl + "/salesvc/ajax/flexible_station_st
 let GetUserInfoAPIUrl = BaseUrl + "/my/ajax/member/info" //获取用户信息api地址
 let LoginAPIUrl = BaseUrl + "/my/ajax/login/submit" //登录api地址
 let ProxyCreateCouponOrderAPIUrl = BaseUrl + "/salesvc/ajax/booking/create_coupon_order" //代客下单api地址
+let AjaxConfirmStationReservationAPIUrl = BaseUrl + "/salesvc/ajax/reserve/confirm_station" //预约工位api地址
+let AjaxGetUserCouponAPIUrl = BaseUrl + "/salesvc/ajax/coupon/my_coupons" //获取用户抵用券
 
 var SOHO3Q_COOKIE_TOKEN = ""
 var SOHO3Q_COOKIE_SID = ""
@@ -171,16 +174,18 @@ private func ProxyCreateOrder(type: Soho3QProxyOrderType, callbackHandler: ((Boo
 
 func ProxyCreateOrderProcedure(sid: String, token: String, callbackHandler: ((Bool, ModelCouponOrder?)->())?) {
     
+    let userHeader = [
+        "Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Accept-Encoding": "gzip, deflate",
+        "Cookie": "sid=\(sid); token=\(token)"]
     Alamofire.request(.POST, GetUserInfoAPIUrl,
         parameters: nil,
         encoding: .URL,
-        headers: [
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept-Encoding": "gzip, deflate",
-            "Cookie": "sid=\(sid); token=\(token)"]
+        headers: userHeader
         )
         .validate()
-        .responseObject(completionHandler: {
+        .responseObject {
             (response: Response<ModelGetUserInfo, NSError>) in
             switch response.result {
             case .Success:
@@ -201,11 +206,12 @@ func ProxyCreateOrderProcedure(sid: String, token: String, callbackHandler: ((Bo
                             break;
                         }
                     }
+                    
                     ProxyAccountLogin { succeed in
                         if succeed {
                             ProxyCreateOrder(type) { succeed, result in
                                 if succeed {
-                                    callbackHandler?(true, result)
+                                    callbackHandler?(true, result) //下单成功
                                 } else {
                                     callbackHandler?(false, nil)
                                 }
@@ -222,41 +228,61 @@ func ProxyCreateOrderProcedure(sid: String, token: String, callbackHandler: ((Bo
                 callbackHandler?(false, nil)
                 break
             }
-            })
+    }
 }
 
-func generatePaymentForm(couponOrder: ModelCouponOrder) {
-    if let order_id = couponOrder.paymentOrderId,
-        order_num = couponOrder.paymentOrderNum,
-        bill_id = couponOrder.paymentBillId,
-        order_amount = couponOrder.totalPrice?.description {
-        let project_id = "project_id"
-        let channel = "0"
-        let parameters = ["order_id": order_id, "order_num": order_num, "bill_id": bill_id, "order_amount": order_amount, "project_id": project_id, "channel": channel]
-        let header = [
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept-Encoding": "gzip, deflate",
-            "Cookie": "sid=\(SOHO3Q_COOKIE_SID); token=\(SOHO3Q_COOKIE_TOKEN)"]
-        Alamofire.request(.POST, PaymentFormSubmitUrl, parameters: parameters, encoding: .URL, headers: header)
-            .validate()
-            .response { (request, response, data, error) in
-                if let data = data {
-                    let responseBody = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    print("\(responseBody)")
-                }
+class SOHO3Q_USER_API {
+    
+    class func confirmStationReservation(project: ModelProjectItem, reservationDate: NSDate, callbackHandler: ((Bool, ModelReserveStationResult?) -> ())?) {
+        if let projectId = project.projectId, cityId = project.cityId, projectName = project.projectNameOrigin, projectLocation = project.projectLocation {
+            Alamofire.request(.POST,
+                AjaxConfirmStationReservationAPIUrl,
+                parameters: ["projectId": projectId, "cityId": cityId, "projectName": projectName, "projectLocation": projectLocation, "leaseTime": reservationDate.S3_dateString01],
+                encoding: .URL,
+                headers: [
+                    "Accept": "application/json",
+                    "Accept-Encoding": "gzip, deflate",
+                    "Cookie": "sid=\(SOHO3Q_COOKIE_SID); token=\(SOHO3Q_COOKIE_TOKEN)"
+                ])
+                .validate()
+                .responseObject(completionHandler: { (response: Response<ModelReserveStationResponse, NSError>) in
+                    var retVal = false
+                    var result: ModelReserveStationResult? = nil
+                    if response.result.isSuccess {
+                        if let value = response.result.value {
+                            if nil != value.result && nil != value.result?.billId {
+                                retVal = true
+                                result = value.result
+                            }
+                        }
+                    }
+                    callbackHandler?(retVal, result)
+                })
+        }
+    }
+    
+    class func generatePaymentForm(couponOrder: ModelCouponOrder) {
+        if let order_id = couponOrder.paymentOrderId,
+            order_num = couponOrder.paymentOrderNum,
+            bill_id = couponOrder.paymentBillId,
+            order_amount = couponOrder.totalPrice?.description {
+            let project_id = "project_id"
+            let channel = "0"
+            let parameters = ["order_id": order_id, "order_num": order_num, "bill_id": bill_id, "order_amount": order_amount, "project_id": project_id, "channel": channel]
+            let header = [
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Accept-Encoding": "gzip, deflate",
+                "Cookie": "sid=\(SOHO3Q_COOKIE_SID); token=\(SOHO3Q_COOKIE_TOKEN)"]
+            Alamofire.request(.POST, PaymentFormSubmitUrl, parameters: parameters, encoding: .URL, headers: header)
+                .validate()
+                .response { (request, response, data, error) in
+                    if let data = data {
+                        let responseBody = NSString(data: data, encoding: NSUTF8StringEncoding)
+                        print("\(responseBody)")
+                    }
+            }
         }
     }
 }
 
-extension UIAlertView {
-    class func soho3q_showOrderAlert(result: ModelCouponOrder?) {
-//        if let result = result, items = result.items {
-//            if items.count > 0 {
-//                let item = items[0]
-//                let name = item.name
-//                UIAlertView(title: "下单成功", message: "为\(result.mobile)生成\(name): paymentOrderNum=\(result.paymentOrderNum), paymentOrderId=\(result.paymentOrderId), paymentBillId=\(result.paymentBillId), originalPrice=\(result.originalPrice), totalPrice=\(result.totalPrice)", delegate: nil, cancelButtonTitle: "确定").show()
-////                generatePaymentForm(result)
-//            }
-//        }
-    }
-}
+

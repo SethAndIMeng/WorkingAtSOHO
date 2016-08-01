@@ -29,6 +29,7 @@ class ModelProjectItem: Mappable {
     var projectId: String?
     var projectLocation: String?
     var projectName: String?
+    var projectNameOrigin: String?
     var localCoordinate: String?
     var projectContent: String?
     var projectArea: String?
@@ -52,9 +53,15 @@ class ModelProjectItem: Mappable {
         cityName <- map["cityName"]
         projectId <- map["projectId"]
         projectLocation <- map["projectLocation"]
+        projectNameOrigin <- map["projectName"]
         projectName <- map["projectName"]
+        if let projectNameOrigin = projectNameOrigin {
+            if nil == projectNameOrigin.rangeOfString("SOHO", options: .CaseInsensitiveSearch, range: nil, locale: nil) {
+                //不包含"SOHO"字样
+                projectName = projectNameOrigin.stringByReplacingOccurrencesOfString("3Q", withString: "SOHO 3Q", options: .CaseInsensitiveSearch, range: nil)
+            }
+        }
         localCoordinate <- map["localCoordinate"]
-        projectName <- map["projectName"]
         localCoordinate <- map["localCoordinate"]
         projectContent <- map["projectContent"]
         projectArea <- map["projectArea"]
