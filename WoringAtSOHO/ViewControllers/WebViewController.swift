@@ -60,7 +60,7 @@ class WebViewController: UIViewController, WKNavigationDelegate {
 //        let constrains1 = NSLayoutConstraint.constraintsWithVisualFormat("V:|-(20)-[webView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["webView": webView])
 //        view.addConstraints(constrains1)
         
-        self.edgesForExtendedLayout = UIRectEdge(rawValue: 0);
+        self.edgesForExtendedLayout = .None;
         
         webViewConstraintV0 = NSLayoutConstraint(item: webView, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1.0, constant: 20)
         webViewConstraintV1 = NSLayoutConstraint(item: webView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1.0, constant: 0)

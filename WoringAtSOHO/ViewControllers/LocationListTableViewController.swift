@@ -210,6 +210,11 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
             let sb = UIStoryboard(name: "Main", bundle: nil)
             if let reservationListVC = sb.instantiateViewControllerWithIdentifier("MyReservationListViewController") as? MyReservationListViewController {
                 self?.navigationController?.pushViewController(reservationListVC, animated: true)
+                SOHO3Q_USER_API.getAvailableStationCount { availableCount in
+                    if availableCount > 0 {
+                        UIAlertView(title: "账户有余额", message: "您的账户中还有\(availableCount)张工位预约券可消费", delegate: self, cancelButtonTitle: "确定").show()
+                    }
+                }
             }
         }
     }

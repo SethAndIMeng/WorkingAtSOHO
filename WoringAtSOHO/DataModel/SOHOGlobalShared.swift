@@ -303,6 +303,37 @@ class SOHO3Q_USER_API {
             }
         }
     }
+    
+    class func getAvailableStationCount(callbackHandler: ((Int) -> ())?) {
+        let sid = SOHO3Q_COOKIE_SID
+        let token = SOHO3Q_COOKIE_TOKEN
+        Alamofire.request(.GET, AjaxGetUserCouponAPIUrl, parameters: nil, encoding: .URL,
+            headers: [
+                "Accept": "application/json",
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Accept-Encoding": "gzip, deflate",
+                "Cookie": "sid=\(sid); token=\(token)"])
+            .validate()
+            .responseObject{ (response: Response<ModelGetMyCouponsResponse, NSError>) in
+                var availableCount = 0
+                switch response.result {
+                case .Success:
+                    if let result = response.result.value?.result {
+                        for item in result {
+                            if item.productType == "OPEN_STATION" {
+                                if let remains = item.availableCount {
+                                    availableCount = remains
+                                }
+                            }
+                        }
+                    }
+                    break
+                case .Failure:
+                    break
+                }
+                callbackHandler?(availableCount)
+        }
+    }
 }
 
 

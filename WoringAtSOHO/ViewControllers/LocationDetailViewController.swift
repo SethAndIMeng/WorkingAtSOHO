@@ -13,6 +13,9 @@ import PKHUD
 
 let CGFloatEpsilon = CGFloat(0.001)
 
+let TagAlertView1 = 1
+let TagAlertView2 = 2
+
 class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCalendarViewDelegate, CVCalendarMenuViewDelegate
 {
     @IBOutlet weak var priceLabel: UILabel!
@@ -284,61 +287,45 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
             PKHUD.sharedHUD.contentView = PKHUDProgressView()
             PKHUD.sharedHUD.show()
             
-            var isCouponAvailable = false
-            Alamofire.request(.GET, AjaxGetUserCouponAPIUrl, parameters: nil, encoding: .URL,
-                headers: [
-                    "Accept": "application/json",
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    "Accept-Encoding": "gzip, deflate",
-                    "Cookie": "sid=\(sid); token=\(token)"])
-                .validate()
-                .responseObject(completionHandler: { [weak self] (response: Response<ModelGetMyCouponsResponse, NSError>) in
-                    switch response.result {
-                    case .Success:
-                        if let result = response.result.value?.result {
-                            for item in result {
-                                if item.productType == "OPEN_STATION" && item.availableCount > 0 {
-                                    isCouponAvailable = true
-                                }
-                            }
-                        }
-                        break
-                    case .Failure:
-                        break
+            SOHO3Q_USER_API.getAvailableStationCount({ availableCount in
+                if availableCount > 0 {
+                    //直接预约工位
+                    PKHUD.sharedHUD.hide(true) {[weak self] _ in
+                        let alertView = UIAlertView(title: "账户有余额", message: "您的账户中还有\(availableCount)张工位预约券可消费", delegate: self, cancelButtonTitle: "取消预约")
+                        alertView.tag = TagAlertView1
+                        self?.alertView = alertView
+                        alertView.addButtonWithTitle("立刻使用")
+                        alertView.show()
                     }
-                    if isCouponAvailable {
-                        //直接预约工位
-                        PKHUD.sharedHUD.hide(true, completion: {[weak self] _ in
-                            self?.paymentDoneProcedure(true)
-                        })
-                    } else {
-                        //先创建订单，让用户支付支付买券再预约
-                        ProxyCreateOrderProcedure(sid, token: token) { [weak self] succeed, result in
-                            guard let strongSelf = self else {
-                                return
-                            }
-                            if succeed {
-                                PKHUD.sharedHUD.hide(true, completion: { _ in
-                                    let sb = UIStoryboard(name: "Main", bundle: nil)
-                                    if let paymentVC = sb.instantiateViewControllerWithIdentifier("PaymentViewController") as? PaymentViewController {
-                                        paymentVC.couponOrder = result
-                                        paymentVC.paymentDoneCallback = { [weak self] succeed in
-                                            self?.paymentDoneProcedure(succeed)
-                                        }
-                                        strongSelf.navigationController?.pushViewController(paymentVC, animated: true)
+                } else {
+                    //先创建订单，让用户支付支付买券再预约
+                    ProxyCreateOrderProcedure(sid, token: token) { [weak self] succeed, result in
+                        guard let strongSelf = self else {
+                            return
+                        }
+                        if succeed {
+                            PKHUD.sharedHUD.hide(true, completion: { _ in
+                                let sb = UIStoryboard(name: "Main", bundle: nil)
+                                if let paymentVC = sb.instantiateViewControllerWithIdentifier("PaymentViewController") as? PaymentViewController {
+                                    paymentVC.couponOrder = result
+                                    paymentVC.paymentDoneCallback = { [weak self] succeed in
+                                        self?.paymentDoneProcedure(succeed)
                                     }
-                                })
-                            } else {
-                                PKHUD.sharedHUD.hide(false)
-                            }
+                                    strongSelf.navigationController?.pushViewController(paymentVC, animated: true)
+                                }
+                            })
+                        } else {
+                            PKHUD.sharedHUD.hide(false)
                         }
                     }
-                })
+                }
+            })
         } else {
             UIAlertView(title: "登录失败", message: "请尝试重新登录", delegate: nil, cancelButtonTitle: "确定").show()
         }
     }
     
+    var alertView: UIAlertView? = nil
     func paymentDoneProcedure(succeed: Bool) {
         if succeed {
             if let project = SOHO3Q_USER_RESERVATION_PROJECT, date = SOHO3Q_USER_RESERVATION_DATE {
@@ -348,11 +335,19 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
                 
                 SOHO3Q_USER_API
                     .confirmStationReservation(project, reservationDate: date) { succeed, result in
-                        PKHUD.sharedHUD.hide(true, completion: { _ in
+                        PKHUD.sharedHUD.hide(true, completion: { [weak self] _ in
                             if succeed {
-                                UIAlertView(title: "兑换成功", message: "兑换了工位\(result?.billId)", delegate: nil, cancelButtonTitle: "确定").show()
+                                var projectName = "SOHO"
+                                if let name = project.projectName {
+                                    projectName = name
+                                }
+                                let alertView = UIAlertView(title: "预约成功", message: "已成功预约了\(date.S3_dateString01)在\(projectName)工位", delegate: self, cancelButtonTitle: "关闭")
+                                alertView.tag = TagAlertView2
+                                self?.alertView = alertView
+                                alertView.addButtonWithTitle("查看我的预约")
+                                alertView.show()
                             } else {
-                                UIAlertView(title: "兑换失败", message: "当前工位已经预约光了，请您预约其它时间地点的工位", delegate: nil, cancelButtonTitle: "确定").show()
+                                UIAlertView(title: "预约失败", message: "当前工位已经预约光了，请您预约其它时间地点的工位", delegate: self, cancelButtonTitle: "确定").show()
                             }
                         })
                 }
@@ -363,9 +358,33 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
         }
     }
     
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        switch alertView.tag {
+        case TagAlertView1:
+            if buttonIndex == 1 {
+                self.paymentDoneProcedure(true)
+            }
+            break
+        case TagAlertView2:
+            if buttonIndex == 1 {
+                SOHO3Q_USER_API.loginIfNeeded(self.navigationController) { [weak self] succeed in
+                    let sb = UIStoryboard(name: "Main", bundle: nil)
+                    if let reservationListVC = sb.instantiateViewControllerWithIdentifier("MyReservationListViewController") as? MyReservationListViewController {
+                        self?.navigationController?.pushViewController(reservationListVC, animated: true)
+                    }
+                }
+            }
+            break
+        default:
+            break
+        }
+        
+    }
+    
     deinit {
         customImageScrollView.delegate = nil
         scrollView.delegate = nil
+        alertView?.delegate = nil
     }
 
 }
