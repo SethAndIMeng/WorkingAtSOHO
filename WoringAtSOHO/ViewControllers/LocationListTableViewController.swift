@@ -52,7 +52,7 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
             self.title = "SOHO3Q" + title
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "我的预定", style: .Plain, target: self, action: #selector(self.rightTopBarButtonItemPressed(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "我的工位", style: .Plain, target: self, action: #selector(self.rightTopBarButtonItemPressed(_:)))
         
         tableView.estimatedRowHeight = 300; // 设置UITableViewCell每行大概多高
         tableView.rowHeight = UITableViewAutomaticDimension;

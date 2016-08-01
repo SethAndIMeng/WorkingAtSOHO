@@ -54,7 +54,10 @@ class LoginViewController: WebViewController {
                             SOHO3Q_COOKIE_TOKEN = token
                             SOHO3Q_COOKIE_SID = sid
                             SOHO3Q_COOKIE_USER_PHONE = user_phone
-                            SOHO3Q_COOKIE_EXPIRE_DATE = NSDate(timeIntervalSinceNow: SOHO3Q_COOKIE_Expire_Time_Interval)
+                            SOHO3Q_COOKIE_TOKEN_SET_DATE = NSDate()
+                            
+                            //登录成功后记录此数据
+                            Soho3QUserInfo.saveSoho3QUserInfo()
                             
                             self.loginSucceedCallback?(succeed: true)
                             self.dismissViewControllerAnimated(true) {

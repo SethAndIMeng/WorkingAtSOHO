@@ -65,8 +65,43 @@ let AjaxGetUserCouponAPIUrl = BaseUrl + "/salesvc/ajax/coupon/my_coupons" //获�
 var SOHO3Q_COOKIE_TOKEN = ""
 var SOHO3Q_COOKIE_SID = ""
 var SOHO3Q_COOKIE_USER_PHONE = "" //客户的手机号（代客下单ID）
-var SOHO3Q_COOKIE_EXPIRE_DATE = NSDate(timeIntervalSince1970: 0) //当前COOKIE到期时间
-let SOHO3Q_COOKIE_Expire_Time_Interval = NSTimeInterval(60 * 60 * 5) //5小时后过期
+
+let SOHO3Q_COOKIE_Expire_Time_Interval = NSTimeInterval(3 * 60 * 60) //3小时后过期
+var SOHO3Q_COOKIE_TOKEN_SET_DATE = NSDate(timeIntervalSince1970: 0) //当前COOKIE的设置时间
+
+class Soho3QUserInfo {
+    static let keyToken = "SOHO3Q_COOKIE_TOKEN"
+    static let keySid = "SOHO3Q_COOKIE_SID"
+    static let keyPhone = "SOHO3Q_COOKIE_USER_PHONE"
+    static let keyDate = "SOHO3Q_COOKIE_TOKEN_SET_DATE"
+    
+    class func loadSoho3QUserInfo() {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        if let token = userDefaults.objectForKey(keyToken) as? String {
+            SOHO3Q_COOKIE_TOKEN = token
+        }
+        if let sid = userDefaults.objectForKey(keySid) as? String {
+            SOHO3Q_COOKIE_SID = sid
+        }
+        if let phone = userDefaults.objectForKey(keyPhone) as? String {
+            SOHO3Q_COOKIE_USER_PHONE = phone
+        }
+        if let date = userDefaults.objectForKey(keyDate) as? NSDate {
+            if date.compare(NSDate()) == .OrderedAscending {
+                //验证时间是正确的
+                SOHO3Q_COOKIE_TOKEN_SET_DATE = date
+            }
+        }
+    }
+    
+    class func saveSoho3QUserInfo() {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
+        userDefaults.setValue(SOHO3Q_COOKIE_TOKEN, forKey: keyToken)
+        userDefaults.setValue(SOHO3Q_COOKIE_SID, forKey: keySid)
+        userDefaults.setValue(SOHO3Q_COOKIE_USER_PHONE, forKey: keyPhone)
+        userDefaults.setValue(SOHO3Q_COOKIE_TOKEN_SET_DATE, forKey: keyDate)
+    }
+}
 
 var SOHO3Q_USER_RESERVATION_DATE: NSDate? = nil
 var SOHO3Q_USER_RESERVATION_PROJECT: ModelProjectItem? = nil
@@ -287,7 +322,7 @@ class SOHO3Q_USER_API {
     class func loginIfNeeded(currentVC: UIViewController?, callbackHandler: ((Bool) -> ())?) {
         let sid = SOHO3Q_COOKIE_SID
         let token = SOHO3Q_COOKIE_TOKEN
-        if NSDate().compare(SOHO3Q_COOKIE_EXPIRE_DATE) == .OrderedAscending &&
+        if NSDate().compare(NSDate(timeInterval: SOHO3Q_COOKIE_Expire_Time_Interval, sinceDate: SOHO3Q_COOKIE_TOKEN_SET_DATE)) == .OrderedAscending &&
             sid.characters.count > 0 &&
             token.characters.count > 0 {
             //已经登录，且 当前时间 小于 过期时间，则跳过登录流程

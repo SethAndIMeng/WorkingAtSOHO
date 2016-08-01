@@ -40,6 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     window.rootViewController = mainViewController
                 }
                 application.statusBarStyle = .LightContent
+                
+                Soho3QUserInfo.loadSoho3QUserInfo()
             })
         }
         

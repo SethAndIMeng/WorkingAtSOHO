@@ -26,6 +26,7 @@
 		0D8017961D4EFAF8005E232A /* ModelReserveStationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8017951D4EFAF8005E232A /* ModelReserveStationResponse.swift */; };
 		0D8017981D4F0DF8005E232A /* ModelGetMyCouponsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8017971D4F0DF8005E232A /* ModelGetMyCouponsResponse.swift */; };
 		0DDAFFB91D3F3EC50006F238 /* CopyableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDAFFB81D3F3EC50006F238 /* CopyableLabel.swift */; };
+		0DE2AC511D4F69E300B5FA4F /* MyReservationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2AC501D4F69E300B5FA4F /* MyReservationListViewController.swift */; };
 		0DEFA6FD1D47E56800D063BD /* ModelCreateCouponOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEFA6FC1D47E56800D063BD /* ModelCreateCouponOrder.swift */; };
 		0DEFA6FF1D4893A000D063BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEFA6FE1D4893A000D063BD /* WebViewController.swift */; };
 		0DEFA7011D4894CA00D063BD /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEFA7001D4894CA00D063BD /* PaymentViewController.swift */; };
@@ -75,6 +76,7 @@
 		0D8017951D4EFAF8005E232A /* ModelReserveStationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelReserveStationResponse.swift; sourceTree = "<group>"; };
 		0D8017971D4F0DF8005E232A /* ModelGetMyCouponsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelGetMyCouponsResponse.swift; sourceTree = "<group>"; };
 		0DDAFFB81D3F3EC50006F238 /* CopyableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyableLabel.swift; sourceTree = "<group>"; };
+		0DE2AC501D4F69E300B5FA4F /* MyReservationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyReservationListViewController.swift; sourceTree = "<group>"; };
 		0DEFA6FC1D47E56800D063BD /* ModelCreateCouponOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCreateCouponOrder.swift; sourceTree = "<group>"; };
 		0DEFA6FE1D4893A000D063BD /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		0DEFA7001D4894CA00D063BD /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				0DEFA6FE1D4893A000D063BD /* WebViewController.swift */,
 				0D022E691D45B67A002E11B6 /* LoginViewController.swift */,
 				0DEFA7001D4894CA00D063BD /* PaymentViewController.swift */,
+				0DE2AC501D4F69E300B5FA4F /* MyReservationListViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -186,8 +189,8 @@
 				0D8017971D4F0DF8005E232A /* ModelGetMyCouponsResponse.swift */,
 				0D0C2DEF1D378B0E007BC936 /* SOHOProjectListSample.json */,
 				0D022E731D473FC6002E11B6 /* ModelSOHOApi.swift */,
-				0D0C2DF11D381460007BC936 /* SOHOGlobalShared.swift */,
 				0D8017931D4EF35E005E232A /* SOHOExtension.swift */,
+				0D0C2DF11D381460007BC936 /* SOHOGlobalShared.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				0D022E6A1D45B67A002E11B6 /* LoginViewController.swift in Sources */,
 				0DEFA6FF1D4893A000D063BD /* WebViewController.swift in Sources */,
 				0D8017961D4EFAF8005E232A /* ModelReserveStationResponse.swift in Sources */,
+				0DE2AC511D4F69E300B5FA4F /* MyReservationListViewController.swift in Sources */,
 				0D0C2DF21D381460007BC936 /* SOHOGlobalShared.swift in Sources */,
 				0D8017981D4F0DF8005E232A /* ModelGetMyCouponsResponse.swift in Sources */,
 				0D0C2DE91D373C66007BC936 /* LocationListTableViewController.swift in Sources */,
