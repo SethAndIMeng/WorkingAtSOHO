@@ -101,6 +101,14 @@ class Soho3QUserInfo {
         userDefaults.setValue(SOHO3Q_COOKIE_USER_PHONE, forKey: keyPhone)
         userDefaults.setValue(SOHO3Q_COOKIE_TOKEN_SET_DATE, forKey: keyDate)
     }
+    
+    class func resetSoho3QUserInfo() {
+        SOHO3Q_COOKIE_TOKEN = ""
+        SOHO3Q_COOKIE_SID = ""
+        SOHO3Q_COOKIE_USER_PHONE = ""
+        SOHO3Q_COOKIE_TOKEN_SET_DATE = NSDate(timeIntervalSince1970: 0)
+        saveSoho3QUserInfo()
+    }
 }
 
 var SOHO3Q_USER_RESERVATION_DATE: NSDate? = nil

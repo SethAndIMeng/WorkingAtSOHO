@@ -378,7 +378,6 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
         default:
             break
         }
-        
     }
     
     deinit {

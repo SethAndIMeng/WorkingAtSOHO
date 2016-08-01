@@ -838,15 +838,25 @@
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rS4-fu-j1B">
+                                <rect key="frame" x="299" y="27" width="60" height="30"/>
+                                <state key="normal" title="退出登录"/>
+                                <connections>
+                                    <action selector="exitButtonPressed:" destination="xmh-X7-EHS" eventType="touchUpInside" id="6uI-rR-qvx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DT3-3w-hLL" firstAttribute="width" secondItem="FM7-np-SpO" secondAttribute="width" constant="-8" id="2sR-6F-x45"/>
+                            <constraint firstItem="rS4-fu-j1B" firstAttribute="top" secondItem="Rcs-4t-vrA" secondAttribute="bottom" constant="10" id="BDf-aE-zc4"/>
                             <constraint firstItem="FM7-np-SpO" firstAttribute="leading" secondItem="ZDd-TR-RSD" secondAttribute="leadingMargin" constant="-15" id="EIQ-57-b6M"/>
                             <constraint firstItem="DT3-3w-hLL" firstAttribute="centerX" secondItem="FM7-np-SpO" secondAttribute="centerX" id="Goc-CR-UNY"/>
                             <constraint firstItem="DT3-3w-hLL" firstAttribute="centerY" secondItem="FM7-np-SpO" secondAttribute="centerY" id="Gw8-qA-RPz"/>
                             <constraint firstItem="FM7-np-SpO" firstAttribute="leading" secondItem="ZDd-TR-RSD" secondAttribute="leadingMargin" constant="-15" id="Isz-gW-GUT"/>
+                            <constraint firstItem="rS4-fu-j1B" firstAttribute="centerY" secondItem="FM7-np-SpO" secondAttribute="centerY" id="N77-ud-SCF"/>
                             <constraint firstItem="FM7-np-SpO" firstAttribute="top" secondItem="Rcs-4t-vrA" secondAttribute="bottom" id="SB6-jq-Hei"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rS4-fu-j1B" secondAttribute="trailing" id="ewq-VY-VA3"/>
                             <constraint firstItem="FM7-np-SpO" firstAttribute="top" secondItem="ZDd-TR-RSD" secondAttribute="topMargin" constant="5" id="hiS-sO-H4u"/>
                             <constraint firstItem="DT3-3w-hLL" firstAttribute="height" secondItem="FM7-np-SpO" secondAttribute="height" constant="-8" id="vQt-uu-LRk"/>
                         </constraints>
@@ -854,6 +864,7 @@
                             <mask key="constraints">
                                 <exclude reference="EIQ-57-b6M"/>
                                 <exclude reference="hiS-sO-H4u"/>
+                                <exclude reference="BDf-aE-zc4"/>
                             </mask>
                         </variation>
                     </view>
@@ -861,6 +872,7 @@
                     <connections>
                         <outlet property="closeButton" destination="FM7-np-SpO" id="39K-I5-nRa"/>
                         <outlet property="closeButtonBackgroundView" destination="DT3-3w-hLL" id="F3x-tU-4D0"/>
+                        <outlet property="exitButton" destination="rS4-fu-j1B" id="qna-ga-aZ8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E5o-Xe-HS7" userLabel="First Responder" sceneMemberID="firstResponder"/>
