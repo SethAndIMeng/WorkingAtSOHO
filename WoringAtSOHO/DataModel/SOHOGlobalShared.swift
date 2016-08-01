@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 //import PKHUD
 
-let TestEnvironment = true
+let TestEnvironment = false
 
 var HostUrl: String {
     if TestEnvironment {
