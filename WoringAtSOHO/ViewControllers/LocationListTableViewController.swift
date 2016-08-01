@@ -52,6 +52,8 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
             self.title = "SOHO3Q" + title
         }
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "我的预定", style: .Plain, target: self, action: #selector(self.rightTopBarButtonItemPressed(_:)))
+        
         tableView.estimatedRowHeight = 300; // 设置UITableViewCell每行大概多高
         tableView.rowHeight = UITableViewAutomaticDimension;
         
@@ -200,6 +202,16 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func cityChangedFromSender(sender: UISegmentedControl) {
         selectedList = sender.selectedSegmentIndex
         tableView.reloadData()
+    }
+    
+    func rightTopBarButtonItemPressed(sender: AnyObject?) {
+        
+        SOHO3Q_USER_API.loginIfNeeded(self.navigationController) { [weak self] succeed in
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let reservationListVC = sb.instantiateViewControllerWithIdentifier("MyReservationListViewController") as? MyReservationListViewController {
+                self?.navigationController?.pushViewController(reservationListVC, animated: true)
+            }
+        }
     }
     
     deinit {

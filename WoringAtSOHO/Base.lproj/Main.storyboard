@@ -800,6 +800,73 @@
             </objects>
             <point key="canvasLocation" x="949.5" y="-816.5"/>
         </scene>
+        <!--My Reservation List View Controller-->
+        <scene sceneID="lcP-Oq-I4Z">
+            <objects>
+                <viewController storyboardIdentifier="MyReservationListViewController" id="xmh-X7-EHS" customClass="MyReservationListViewController" customModule="WoringAtSOHO" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rcs-4t-vrA"/>
+                        <viewControllerLayoutGuide type="bottom" id="r2n-RE-RdL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ZDd-TR-RSD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DT3-3w-hLL" userLabel="CloseButtonBackground">
+                                <rect key="frame" x="5" y="24" width="60" height="36"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="41Z-La-cHd"/>
+                                    <constraint firstAttribute="width" constant="35" id="DR8-Jf-uiv"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="41Z-La-cHd"/>
+                                        <exclude reference="DR8-Jf-uiv"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FM7-np-SpO" userLabel="CloseButton">
+                                <rect key="frame" x="1" y="20" width="68" height="44"/>
+                                <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="217-Kz-Iph"/>
+                                    <constraint firstAttribute="width" constant="68" id="unH-D9-E8X"/>
+                                </constraints>
+                                <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DT3-3w-hLL" firstAttribute="width" secondItem="FM7-np-SpO" secondAttribute="width" constant="-8" id="2sR-6F-x45"/>
+                            <constraint firstItem="FM7-np-SpO" firstAttribute="leading" secondItem="ZDd-TR-RSD" secondAttribute="leadingMargin" constant="-15" id="EIQ-57-b6M"/>
+                            <constraint firstItem="DT3-3w-hLL" firstAttribute="centerX" secondItem="FM7-np-SpO" secondAttribute="centerX" id="Goc-CR-UNY"/>
+                            <constraint firstItem="DT3-3w-hLL" firstAttribute="centerY" secondItem="FM7-np-SpO" secondAttribute="centerY" id="Gw8-qA-RPz"/>
+                            <constraint firstItem="FM7-np-SpO" firstAttribute="leading" secondItem="ZDd-TR-RSD" secondAttribute="leadingMargin" constant="-15" id="Isz-gW-GUT"/>
+                            <constraint firstItem="FM7-np-SpO" firstAttribute="top" secondItem="Rcs-4t-vrA" secondAttribute="bottom" id="SB6-jq-Hei"/>
+                            <constraint firstItem="FM7-np-SpO" firstAttribute="top" secondItem="ZDd-TR-RSD" secondAttribute="topMargin" constant="5" id="hiS-sO-H4u"/>
+                            <constraint firstItem="DT3-3w-hLL" firstAttribute="height" secondItem="FM7-np-SpO" secondAttribute="height" constant="-8" id="vQt-uu-LRk"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="EIQ-57-b6M"/>
+                                <exclude reference="hiS-sO-H4u"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="closeButton" destination="FM7-np-SpO" id="39K-I5-nRa"/>
+                        <outlet property="closeButtonBackgroundView" destination="DT3-3w-hLL" id="F3x-tU-4D0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E5o-Xe-HS7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="441.5" y="-804.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="LocationOrange" width="96" height="128"/>

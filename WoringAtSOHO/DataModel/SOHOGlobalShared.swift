@@ -283,6 +283,26 @@ class SOHO3Q_USER_API {
             }
         }
     }
+    
+    class func loginIfNeeded(currentVC: UIViewController?, callbackHandler: ((Bool) -> ())?) {
+        let sid = SOHO3Q_COOKIE_SID
+        let token = SOHO3Q_COOKIE_TOKEN
+        if NSDate().compare(SOHO3Q_COOKIE_EXPIRE_DATE) == .OrderedAscending &&
+            sid.characters.count > 0 &&
+            token.characters.count > 0 {
+            //已经登录，且 当前时间 小于 过期时间，则跳过登录流程
+            callbackHandler?(true)
+        } else {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let loginVC = sb.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {
+                loginVC.loginSucceedCallback = { succeed in
+                    callbackHandler?(succeed)
+                }
+                currentVC?.presentViewController(loginVC, animated: true) {
+                }
+            }
+        }
+    }
 }
 
 

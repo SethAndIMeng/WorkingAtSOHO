@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let window = self?.window {
                     window.rootViewController = mainViewController
                 }
+                application.statusBarStyle = .LightContent
             })
         }
         

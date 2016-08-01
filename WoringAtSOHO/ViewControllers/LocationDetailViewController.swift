@@ -269,23 +269,9 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
     }
     
     @IBAction func reservationButtonPressed(sender: AnyObject) {
-        let sid = SOHO3Q_COOKIE_SID
-        let token = SOHO3Q_COOKIE_TOKEN
-        if NSDate().compare(SOHO3Q_COOKIE_EXPIRE_DATE) == .OrderedAscending &&
-            sid.characters.count > 0 &&
-            token.characters.count > 0 {
-            //已经登录，且 当前时间 小于 过期时间，则跳过登录流程
-            loginSucceedProcedure(true)
-        } else {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            if let loginVC = sb.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {
-                loginVC.loginSucceedCallback = {
-                    [weak self] succeed in
-                    self?.loginSucceedProcedure(succeed)
-                }
-                self.navigationController?.presentViewController(loginVC, animated: true, completion: {
-                })
-            }
+        
+        SOHO3Q_USER_API.loginIfNeeded(self.navigationController) { [weak self] succeed in
+            self?.loginSucceedProcedure(true)
         }
     }
     
