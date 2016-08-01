@@ -38,6 +38,8 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    weak var refreshControl: UIRefreshControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,6 +48,11 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        let refreshControl = UIRefreshControl()
+        self.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(self.refreshTableViewData(_:)), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
         
         if let infoDictionary = NSBundle.mainBundle().infoDictionary,
             title = infoDictionary["CFBundleDisplayName"] as? String {
@@ -57,36 +64,8 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         tableView.estimatedRowHeight = 300; // 设置UITableViewCell每行大概多高
         tableView.rowHeight = UITableViewAutomaticDimension;
         
-        Alamofire.request(.GET, AjaxGetProjectListAPIUrl, parameters: nil)
-            .validate()
-            .responseObject { [weak self] (response: Response<ModelProjectList, NSError>) in
-                switch response.result {
-                case .Success:
-                    guard let strongSelf = self else {
-                        return
-                    }
-                    if let projectList = response.result.value?.result {
-                        for project in projectList {
-                            if let cityName = project.cityName {
-                                switch cityName {
-                                case "北京":
-                                    strongSelf.projectList[0].append(project)
-                                case "上海":
-                                    strongSelf.projectList[1].append(project)
-                                default:
-                                    break;
-                                }
-                            }
-                        }
-                        strongSelf.tableView.reloadData()
-                    }
-                    break
-                    
-                case .Failure:
-                    break
-                }
-                
-        }
+        self.refreshControl.beginRefreshing()
+        refreshTableViewData(nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -216,6 +195,40 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
                     }
                 }
             }
+        }
+    }
+    
+    func refreshTableViewData(sender: UIRefreshControl?) {
+        
+        Alamofire.request(.GET, AjaxGetProjectListAPIUrl, parameters: nil)
+            .validate()
+            .responseObject { [weak self] (response: Response<ModelProjectList, NSError>) in
+                guard let strongSelf = self else {
+                    return
+                }
+                switch response.result {
+                case .Success:
+                    if let projectList = response.result.value?.result {
+                        for project in projectList {
+                            if let cityName = project.cityName {
+                                switch cityName {
+                                case "北京":
+                                    strongSelf.projectList[0].append(project)
+                                case "上海":
+                                    strongSelf.projectList[1].append(project)
+                                default:
+                                    break;
+                                }
+                            }
+                        }
+                        strongSelf.tableView.reloadData()
+                    }
+                    break
+                    
+                case .Failure:
+                    break
+                }
+                strongSelf.refreshControl.endRefreshing()
         }
     }
     
