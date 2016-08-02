@@ -208,19 +208,22 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
                 }
                 switch response.result {
                 case .Success:
-                    if let projectList = response.result.value?.result {
-                        for project in projectList {
+                    if let result = response.result.value?.result {
+                        var projectList = [[ModelProjectItem](), [ModelProjectItem]()]
+                        for project in result {
                             if let cityName = project.cityName {
                                 switch cityName {
                                 case "北京":
-                                    strongSelf.projectList[0].append(project)
+                                    projectList[0].append(project)
                                 case "上海":
-                                    strongSelf.projectList[1].append(project)
+                                    projectList[1].append(project)
                                 default:
                                     break;
                                 }
                             }
                         }
+                        strongSelf.projectList[0] = projectList[0]
+                        strongSelf.projectList[1] = projectList[1]
                         strongSelf.tableView.reloadData()
                     }
                     break
