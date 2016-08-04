@@ -299,6 +299,16 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
             scrollView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true)
         }
     }
+    
+    @IBAction func locationButtonPressed(sender: AnyObject) {
+        
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let mapViewVC = sb.instantiateViewControllerWithIdentifier("MapViewController") as? MapViewController {
+            mapViewVC.projectInfo = projectInfo
+            self.navigationController?.pushViewController(mapViewVC, animated: true)
+        }
+    }
+    
     func loginSucceedProcedure(succeed: Bool) {
         
         if succeed {
