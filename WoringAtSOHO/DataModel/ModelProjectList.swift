@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import MapKit
 
 class ModelProjectList: ModelSOHOApi {
     
@@ -30,7 +31,7 @@ class ModelProjectItem: Mappable {
     var projectLocation: String?
     var projectName: String?
     var projectNameOrigin: String?
-    var localCoordinate: String?
+    var localCoordinate: CLLocationCoordinate2D? = nil
     var projectContent: String?
     var projectArea: String?
     var projectCode: String?
@@ -61,8 +62,15 @@ class ModelProjectItem: Mappable {
                 projectName = projectNameOrigin.stringByReplacingOccurrencesOfString("3Q", withString: "SOHO 3Q", options: .CaseInsensitiveSearch, range: nil)
             }
         }
+        var localCoordinate: String? = ""
         localCoordinate <- map["localCoordinate"]
-        localCoordinate <- map["localCoordinate"]
+        if let listLocalCoordinate = localCoordinate?.componentsSeparatedByString(",") {
+            if listLocalCoordinate.count == 2 {
+                if let latitude = CLLocationDegrees(listLocalCoordinate[1]), longitude = CLLocationDegrees(listLocalCoordinate[0]) {
+                    self.localCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                }
+            }
+        }
         projectContent <- map["projectContent"]
         projectArea <- map["projectArea"]
         projectCode <- map["projectCode"]

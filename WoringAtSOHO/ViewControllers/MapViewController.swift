@@ -39,24 +39,29 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.delegate = self
         mapView.showsUserLocation = true
         title = projectInfo?.projectName
-        if let location = projectInfo?.projectLocation {
-            weak var weakMapView = mapView
-            geoCoder.geocodeAddressString(location) { (listPlacemark: [CLPlacemark]?, error) in
-                if let mapView = weakMapView, listPlacemark = listPlacemark {
-                    
-                    var listAnnotation = [MKAnnotation]()
-                    listPlacemark.forEach({ placemark in
-                        let annotation = MKPlacemark(placemark: placemark)
-                        mapView.addAnnotation(annotation)
-                        listAnnotation.append(annotation)
-                    })
-                    
-//                    let userLocation = mapView.userLocation
-//                    listAnnotation.append(userLocation)
-                    mapView.showAnnotations(listAnnotation, animated: true)
-                    
-                }
-            }
+//        if let location = projectInfo?.projectLocation {
+//            weak var weakMapView = mapView
+//            geoCoder.geocodeAddressString(location) { (listPlacemark: [CLPlacemark]?, error) in
+//                if let mapView = weakMapView, listPlacemark = listPlacemark {
+//                    
+//                    var listAnnotation = [MKAnnotation]()
+//                    listPlacemark.forEach({ placemark in
+//                        let annotation = MKPlacemark(placemark: placemark)
+//                        mapView.addAnnotation(annotation)
+//                        listAnnotation.append(annotation)
+//                    })
+//                    mapView.showAnnotations(listAnnotation, animated: true)
+//                    
+//                }
+//            }
+//        }
+        if let projectInfo = projectInfo, coordinate = projectInfo.localCoordinate {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = projectInfo.projectName
+            annotation.subtitle = projectInfo.projectLocation
+            mapView.addAnnotation(annotation)
+            mapView.setRegion(MKCoordinateRegionMake(coordinate, MKCoordinateSpanMake(0.1, 0.1)), animated: true)
         }
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -87,8 +92,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 if let listPlacemark = listPlacemark {
                     if listPlacemark.count > 0 {
                         let placemark = listPlacemark[0]
-                        userLocation.title = placemark.name
-                        userLocation.subtitle = placemark.locality
+                        userLocation.title = "当前位置"
+                        var subtitle = ""
+                        if let locality = placemark.locality {
+                            subtitle += locality
+                        }
+                        if let name = placemark.name {
+                            subtitle += " "
+                            subtitle += name
+                        }
+                        userLocation.subtitle = subtitle
                     }
                 }
             }
