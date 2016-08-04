@@ -9,35 +9,60 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
 
     let geoCoder = CLGeocoder()
+    
+    static let sharedLocationManager = CLLocationManager()
+    var locationManager: CLLocationManager {
+        return self.dynamicType.sharedLocationManager
+    }
     
     var projectInfo: ModelProjectItem? = nil
     
     @IBOutlet weak var mapView: MKMapView!
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        mapView.delegate = self
+        mapView.showsUserLocation = true
         title = projectInfo?.projectName
         if let location = projectInfo?.projectLocation {
             weak var weakMapView = mapView
             geoCoder.geocodeAddressString(location) { (listPlacemark: [CLPlacemark]?, error) in
                 if let mapView = weakMapView, listPlacemark = listPlacemark {
                     
-                    var listAnnotation = [MKPlacemark]()
+                    var listAnnotation = [MKAnnotation]()
                     listPlacemark.forEach({ placemark in
                         let annotation = MKPlacemark(placemark: placemark)
                         mapView.addAnnotation(annotation)
                         listAnnotation.append(annotation)
                     })
+                    
+//                    let userLocation = mapView.userLocation
+//                    listAnnotation.append(userLocation)
                     mapView.showAnnotations(listAnnotation, animated: true)
                     
                 }
             }
         }
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 1000
+        locationManager.startUpdatingLocation()
+        locationManager.requestWhenInUseAuthorization()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,5 +80,23 @@ class MapViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+        if let location = userLocation.location {
+            geoCoder.reverseGeocodeLocation(location) { (listPlacemark, error) in
+                if let listPlacemark = listPlacemark {
+                    if listPlacemark.count > 0 {
+                        let placemark = listPlacemark[0]
+                        userLocation.title = placemark.name
+                        userLocation.subtitle = placemark.locality
+                    }
+                }
+            }
+        }
+    }
 
+    deinit {
+        mapView.delegate = nil
+        locationManager.stopUpdatingLocation()
+    }
 }
