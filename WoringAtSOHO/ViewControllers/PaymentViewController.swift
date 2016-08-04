@@ -88,7 +88,6 @@ class BackButtonWebViewViewController: WebViewController {
         closeButton.addTarget(self, action: #selector(CloseButtonPressed), forControlEvents: .TouchUpInside)
         
         title = "支付订单"
-//        webViewConstraintV0.constant = -44
 
         // Do any additional setup after loading the view.
     }

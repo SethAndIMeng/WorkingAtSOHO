@@ -17,6 +17,7 @@ import Alamofire
 class WebViewController: UIViewController, WKNavigationDelegate {
     
     weak var webView: WKWebView! = nil
+    weak var progressView: UIProgressView! = nil
     
     weak var webViewConstraintV0: NSLayoutConstraint! = nil
     weak var webViewConstraintV1: NSLayoutConstraint! = nil
@@ -49,8 +50,8 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         super.loadView()
         
         let defaultConfiguration = self.dynamicType.defaultConfiguration
-        let strongWebView = WKWebView(frame: CGRectZero, configuration: defaultConfiguration)
-        webView = strongWebView
+        let webView = WKWebView(frame: CGRectZero, configuration: defaultConfiguration)
+        self.webView = webView
         
         webView.allowsBackForwardNavigationGestures = true
         webView.navigationDelegate = self
@@ -62,9 +63,11 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         
         self.edgesForExtendedLayout = .None;
         
-        webViewConstraintV0 = NSLayoutConstraint(item: webView, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1.0, constant: 20)
-        webViewConstraintV1 = NSLayoutConstraint(item: webView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1.0, constant: 0)
+        let webViewConstraintV0 = NSLayoutConstraint(item: webView, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1.0, constant: 20)
+        self.webViewConstraintV0 = webViewConstraintV0
         view.addConstraint(webViewConstraintV0)
+        let webViewConstraintV1 = NSLayoutConstraint(item: webView, attribute: .Bottom, relatedBy: .Equal, toItem: view, attribute: .Bottom, multiplier: 1.0, constant: 0)
+        self.webViewConstraintV1 = webViewConstraintV1
         view.addConstraint(webViewConstraintV1)
         #if false
             let constrains2 = NSLayoutConstraint.constraintsWithVisualFormat("H:|-[webView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["webView": webView])
@@ -75,6 +78,17 @@ class WebViewController: UIViewController, WKNavigationDelegate {
             view.addConstraint(constraint1)
             view.addConstraint(constraint2)
         #endif
+        
+        let progressView = UIProgressView(progressViewStyle: .Default)
+        self.progressView = progressView
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        webView.addSubview(progressView)
+        let progressViewConstraintsH = NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[progressView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["progressView": progressView])
+        let progressViewConstraintsV = NSLayoutConstraint.constraintsWithVisualFormat("V:[progressView(3)]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["progressView": progressView])
+        webView.addConstraints(progressViewConstraintsH)
+        webView.addConstraints(progressViewConstraintsV)
+        
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .New, context: nil)
     }
     
     override func viewDidLoad() {
@@ -113,7 +127,30 @@ class WebViewController: UIViewController, WKNavigationDelegate {
         NSLog("%@-%@", userContentController, message)
     }
     
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        if let keyPath = keyPath {
+            if keyPath == "estimatedProgress" && object === webView {
+                if let progressView = progressView, webView = webView {
+                    progressView.alpha = 1.0
+                    progressView.setProgress(Float(webView.estimatedProgress), animated: true)
+                    
+                    if webView.estimatedProgress >= 1.0 {
+                        UIView.animateWithDuration(0.3, animations: {
+                            progressView.alpha = 0
+                            }, completion: { succeed in
+                                progressView.setProgress(0, animated: false)
+                        })
+                    }
+                }
+            }
+        }
+    }
+    
     deinit {
+        if let webView = webView {
+            webView.removeObserver(self, forKeyPath: "estimatedProgress", context: nil)
+        }
         webView.UIDelegate = nil
         webView.navigationDelegate = nil
     }
