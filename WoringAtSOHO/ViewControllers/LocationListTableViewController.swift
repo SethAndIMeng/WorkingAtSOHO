@@ -12,6 +12,7 @@ import Alamofire
 import AlamofireObjectMapper
 //import AlamofireImage
 import Kingfisher
+import MapKit
 
 
 class LocationListTableViewCell: UITableViewCell {
@@ -38,7 +39,38 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var mapView: MKMapView!
     weak var refreshControl: UIRefreshControl!
+    
+    var locationManager: CLLocationManager {
+        return sharedLocationManager
+    }
+    enum TableOrMap {
+        case Table
+        case Map
+    }
+    var componentTypeSelected = TableOrMap.Table
+    var componentType: TableOrMap {
+        get {
+            return componentTypeSelected
+        }
+        
+        set {
+            switch newValue {
+            case .Table:
+                tableView.hidden = false
+                mapView.hidden = true
+                navigationItem.rightBarButtonItem?.title = "查看地图"
+                break
+            case .Map:
+                tableView.hidden = true
+                mapView.hidden = false
+                navigationItem.rightBarButtonItem?.title = "返回列表"
+                break
+            }
+            componentTypeSelected = newValue
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,13 +91,34 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
             self.title = "SOHO3Q" + title
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "我的工位", style: .Plain, target: self, action: #selector(self.rightTopBarButtonItemPressed(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "我的工位", style: .Plain, target: self, action: #selector(self.leftTopBarButtonItemPressed(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "地图", style: .Plain, target: self, action: #selector(self.rightTopBarButtonItemPressed(_:)))
         
         tableView.estimatedRowHeight = 300; // 设置UITableViewCell每行大概多高
         tableView.rowHeight = UITableViewAutomaticDimension;
         
         self.refreshControl.beginRefreshing()
         refreshTableViewData(nil)
+        
+        componentType = .Table
+        
+        mapView.showsUserLocation = true
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.distanceFilter = 1000
+        locationManager.startUpdatingLocation()
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        locationManager.stopUpdatingLocation()
     }
 
     override func didReceiveMemoryWarning() {
@@ -183,7 +236,7 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         tableView.reloadData()
     }
     
-    func rightTopBarButtonItemPressed(sender: AnyObject?) {
+    func leftTopBarButtonItemPressed(sender: AnyObject?) {
         
         SOHO3Q_USER_API.loginIfNeeded(self.navigationController) { [weak self] succeed in
             let sb = UIStoryboard(name: "Main", bundle: nil)
@@ -195,6 +248,14 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
                     }
                 }
             }
+        }
+    }
+    
+    func rightTopBarButtonItemPressed(sender: AnyObject?) {
+        if componentType == .Table {
+           componentType = .Map
+        } else if componentType == .Map {
+            componentType = .Table
         }
     }
     

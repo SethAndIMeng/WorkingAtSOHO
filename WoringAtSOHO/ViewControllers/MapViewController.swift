@@ -13,9 +13,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     let geoCoder = CLGeocoder()
     
-    static let sharedLocationManager = CLLocationManager()
     var locationManager: CLLocationManager {
-        return self.dynamicType.sharedLocationManager
+        return sharedLocationManager
     }
     
     var projectInfo: ModelProjectItem? = nil

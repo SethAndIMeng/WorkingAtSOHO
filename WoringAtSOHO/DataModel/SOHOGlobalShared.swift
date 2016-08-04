@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import MapKit
 //import PKHUD
 
 let TestEnvironment = false
@@ -68,6 +69,8 @@ var SOHO3Q_COOKIE_USER_PHONE = "" //客户的手机号（代客下单ID）
 
 let SOHO3Q_COOKIE_Expire_Time_Interval = NSTimeInterval(3 * 60 * 60) //3小时后过期
 var SOHO3Q_COOKIE_TOKEN_SET_DATE = NSDate(timeIntervalSince1970: 0) //当前COOKIE的设置时间
+
+let sharedLocationManager = CLLocationManager()
 
 class Soho3QUserInfo {
     static let keyToken = "SOHO3Q_COOKIE_TOKEN"

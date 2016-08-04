@@ -202,7 +202,7 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
     func didSelectDayView(dayView: DayView, animationDidFinish: Bool) {
         
         if let cvDate = dayView.date, date = cvDate.convertedDate() {
-            NSLog("%@-%@", date, animationDidFinish)
+//            NSLog("%@-%@", date, animationDidFinish)
             
             if let projectInfo = projectInfo, projectId = projectInfo.projectId {
                 

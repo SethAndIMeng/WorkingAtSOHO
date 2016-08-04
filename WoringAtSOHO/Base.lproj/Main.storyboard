@@ -35,14 +35,14 @@
                         <viewControllerLayoutGuide type="bottom" id="bux-iV-47x"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZPT-h1-0O9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OmL-rl-URs">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <rect key="frame" x="-4" y="64" width="328" height="44"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5Sk-4t-eIV">
-                                        <rect key="frame" x="200" y="8" width="200" height="29"/>
+                                        <rect key="frame" x="64" y="8" width="200" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="K7I-jn-quP"/>
                                         </constraints>
@@ -63,22 +63,22 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Nt5-Ix-jrK">
-                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <rect key="frame" x="-4" y="108" width="328" height="460"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationListTableViewCell" id="FOZ-B1-Oqp" customClass="LocationListTableViewCell" customModule="WoringAtSOHO" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="200"/>
+                                        <rect key="frame" x="0.0" y="28" width="328" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FOZ-B1-Oqp" id="PB3-SC-HOA">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IW8-NL-kK7">
-                                                    <rect key="frame" x="8" y="8" width="584" height="184"/>
+                                                    <rect key="frame" x="8" y="8" width="312" height="184"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="75S-yS-40r">
-                                                    <rect key="frame" x="412" y="13" width="175" height="28"/>
+                                                    <rect key="frame" x="140" y="13" width="175" height="28"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日工位: 120元/天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecH-zg-6bQ">
                                                             <rect key="frame" x="2" y="2" width="171" height="24"/>
@@ -98,7 +98,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uQ0-zo-Sqh">
-                                                    <rect key="frame" x="240" y="154" width="120" height="33"/>
+                                                    <rect key="frame" x="104" y="154" width="120" height="33"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="望京SOHO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTV-jp-p1W">
                                                             <rect key="frame" x="2" y="2" width="116" height="29"/>
@@ -143,21 +143,30 @@
                                     <outlet property="delegate" destination="DlM-qV-MaS" id="Vgj-ai-QYg"/>
                                 </connections>
                             </tableView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0JV-eL-uZ1">
+                                <rect key="frame" x="-4" y="108" width="328" height="460"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="0JV-eL-uZ1" firstAttribute="trailing" secondItem="Nt5-Ix-jrK" secondAttribute="trailing" id="45I-am-yy0"/>
                             <constraint firstItem="OmL-rl-URs" firstAttribute="leading" secondItem="ZPT-h1-0O9" secondAttribute="leadingMargin" constant="-20" id="7i7-cY-eAf"/>
+                            <constraint firstItem="0JV-eL-uZ1" firstAttribute="leading" secondItem="Nt5-Ix-jrK" secondAttribute="leading" id="AOL-Qt-kjP"/>
                             <constraint firstItem="Nt5-Ix-jrK" firstAttribute="top" secondItem="OmL-rl-URs" secondAttribute="bottom" id="MDa-1y-wiy"/>
                             <constraint firstItem="OmL-rl-URs" firstAttribute="top" secondItem="l1O-Mr-9zc" secondAttribute="bottom" id="Pxb-Tc-hT5"/>
                             <constraint firstItem="Nt5-Ix-jrK" firstAttribute="leading" secondItem="ZPT-h1-0O9" secondAttribute="leadingMargin" constant="-20" id="Rac-GM-5yM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OmL-rl-URs" secondAttribute="trailing" constant="-20" id="WCT-Lz-m3Y"/>
                             <constraint firstItem="bux-iV-47x" firstAttribute="top" secondItem="Nt5-Ix-jrK" secondAttribute="bottom" id="aRj-4t-dV9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Nt5-Ix-jrK" secondAttribute="trailing" constant="-20" id="hLn-ki-sYJ"/>
+                            <constraint firstItem="0JV-eL-uZ1" firstAttribute="bottom" secondItem="Nt5-Ix-jrK" secondAttribute="bottom" id="hqZ-A8-3dk"/>
+                            <constraint firstItem="0JV-eL-uZ1" firstAttribute="top" secondItem="Nt5-Ix-jrK" secondAttribute="top" id="mRM-cW-tHX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eLg-hF-v7H"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="headerView" destination="OmL-rl-URs" id="YAT-UU-hgT"/>
+                        <outlet property="mapView" destination="0JV-eL-uZ1" id="Ejq-4H-8JQ"/>
                         <outlet property="tableView" destination="Nt5-Ix-jrK" id="00U-5J-xqz"/>
                         <segue destination="fvs-KK-1Ad" kind="show" identifier="SegueToLocationDetail" id="L8i-as-UVY"/>
                     </connections>
@@ -240,7 +249,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此价格未包含增值税" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGn-mP-Aqw" userLabel="描述标签3">
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsV-PP-dOp" userLabel="地址条">
@@ -528,7 +537,7 @@
                                                     <constraint firstAttribute="height" priority="250" constant="21" id="sbZ-Vz-Uta"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
