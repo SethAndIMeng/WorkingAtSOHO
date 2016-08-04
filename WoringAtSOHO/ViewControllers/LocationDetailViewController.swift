@@ -34,6 +34,7 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
     @IBOutlet weak var calendarView: CVCalendarView!
     
     @IBOutlet weak var reservationButton: UIButton!
+    @IBOutlet weak var reservationButtonMask: UIButton!
     
     var pageNumber = 0
     
@@ -110,14 +111,25 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
         }
     }
     
+    func setReservationButtonEnabled(enabled: Bool) {
+        if enabled {
+            reservationButton.enabled = true
+            reservationButton.backgroundColor = UIColor.orangeColor()
+            reservationButtonMask.hidden = true
+        } else {
+            reservationButton.enabled = false
+            reservationButton.backgroundColor = UIColor.darkGrayColor()
+            reservationButtonMask.hidden = false
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
 //        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
         
         reservationButton.setTitle("请选择您的入驻办公日期", forState: .Normal)
-        reservationButton.enabled = false
-        reservationButton.backgroundColor = UIColor.darkGrayColor()
+        setReservationButtonEnabled(false)
     }
     
     override func viewDidLayoutSubviews() {
@@ -216,8 +228,7 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
                 
                 if isAvailableDay {
                     reservationButton.setTitle("正在检索\(dateString)的工位", forState: .Normal)
-                    reservationButton.enabled = false
-                    reservationButton.backgroundColor = UIColor.darkGrayColor()
+                    setReservationButtonEnabled(false)
                     
                     currentProjectAvailableRequest =
                         Alamofire.request(.GET, AjaxGetProjectAvailableAPIUrl, parameters: ["projectId": projectId, "currentDate": dateString])
@@ -237,8 +248,7 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
                                                         if remains > 0 {
                                                             succeed = true
                                                             strongSelf.reservationButton.setTitle("立即预约\(dateString)的工位 (剩余: \(remains))", forState: .Normal)
-                                                            strongSelf.reservationButton.enabled = true
-                                                            strongSelf.reservationButton.backgroundColor = UIColor.orangeColor()
+                                                            strongSelf.setReservationButtonEnabled(true)
                                                             SOHO3Q_USER_RESERVATION_DATE = date
                                                             SOHO3Q_USER_RESERVATION_PROJECT = projectInfo
                                                         }
@@ -254,16 +264,14 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
                                 }
                                 if !succeed {
                                     strongSelf.reservationButton.setTitle("无法预约\(dateString)的工位 (剩余: 0)", forState: .Normal)
-                                    strongSelf.reservationButton.enabled = false
-                                    strongSelf.reservationButton.backgroundColor = UIColor.darkGrayColor()
+                                    strongSelf.setReservationButtonEnabled(false)
                                 }
                                 strongSelf.currentProjectAvailableRequest = nil
                                 
                     }
                 } else {
                     reservationButton.setTitle("请选择今天或未来的日期", forState: .Normal)
-                    reservationButton.enabled = false
-                    reservationButton.backgroundColor = UIColor.darkGrayColor()
+                    setReservationButtonEnabled(false)
                 }
                 
             }
@@ -278,6 +286,19 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
         }
     }
     
+    @IBAction func maskButtonPressed(sender: AnyObject) {
+        var offsetY = yearMonthLabel.frame.origin.y
+        let screenSize = UIScreen.mainScreen().bounds.size
+        let contentSize = scrollView.contentSize
+        if contentSize.height > screenSize.height {
+            //必须contentSize比屏幕大才有意义
+            if offsetY + screenSize.height > contentSize.height {
+                //日历高度比屏幕高度小
+                offsetY = contentSize.height - screenSize.height
+            }
+            scrollView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true)
+        }
+    }
     func loginSucceedProcedure(succeed: Bool) {
         
         if succeed {
