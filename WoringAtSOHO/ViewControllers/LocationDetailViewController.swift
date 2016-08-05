@@ -105,6 +105,8 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
             calendarMenuView.backgroundColor = UIColor.clearColor()
             calendarView.backgroundColor = UIColor.clearColor()
         }
+        customImageScrollView.scrollsToTop = false
+        calendarView.contentController.scrollView.scrollsToTop = false
         
         ProxyAccountLogin { succeed in
 //            if succeed {
