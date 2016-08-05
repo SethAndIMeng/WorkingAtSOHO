@@ -26,15 +26,15 @@ class LocationListTableViewCell: UITableViewCell {
     @IBOutlet weak var label2: UILabel!
 }
 
-class LocationListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LocationListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
     
     //0:北京 1:上海
     var projectList: [[ModelProjectItem]] = [[ModelProjectItem](), [ModelProjectItem]()]
     //当前选择的是哪个
-    var selectedList = 0
+    var selectedListIndex = 0
     
     var selectedProjectList: [ModelProjectItem] {
-        return projectList[selectedList]
+        return projectList[selectedListIndex]
     }
 
     @IBOutlet weak var headerView: UIView!
@@ -66,6 +66,7 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
                 tableView.hidden = true
                 mapView.hidden = false
                 navigationItem.rightBarButtonItem?.title = "返回列表"
+                reloadMapView()
                 break
             }
             componentTypeSelected = newValue
@@ -103,6 +104,7 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         componentType = .Table
         
         mapView.showsUserLocation = true
+        mapView.delegate = self
         
     }
     
@@ -154,7 +156,7 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
             if projectSmallImgs.count > 0 {
                 if let imgPath = projectSmallImgs[0].imgPath, url = NSURL(string: ImageBaseUrl + imgPath) {
 //                    cell.customImageView.af_setImageWithURL(url)
-                    cell.customImageView.kf_setImageWithURL(url)
+                    cell.customImageView.kf_setImageWithURL(url, placeholderImage: sharedPlaceHolderImage, optionsInfo: nil, progressBlock: nil, completionHandler: nil)
                 }
             }
         }
@@ -231,9 +233,38 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
         // Pass the selected object to the new view controller.
     }
     */
+    
+    class CustomPointAnnotation : MKPointAnnotation {
+        var projectInfo: ModelProjectItem? = nil
+    }
+    
+    func reloadMapView() {
+        
+        let projectList = selectedProjectList
+        
+        var listAnnotation = [CustomPointAnnotation]()
+        for projectInfo in projectList {
+            if let coordinate = projectInfo.localCoordinate {
+                let annotation = CustomPointAnnotation()
+                annotation.coordinate = coordinate
+                annotation.title = projectInfo.projectName
+                annotation.subtitle = projectInfo.projectLocation
+                annotation.projectInfo = projectInfo
+                listAnnotation.append(annotation)
+            }
+        }
+        if listAnnotation.count > 0 {
+            mapView.showAnnotations(listAnnotation, animated: true)
+        }
+    }
+    
     @IBAction func cityChangedFromSender(sender: UISegmentedControl) {
-        selectedList = sender.selectedSegmentIndex
+        selectedListIndex = sender.selectedSegmentIndex
+        
         tableView.reloadData()
+        
+        reloadMapView()
+        
     }
     
     func leftTopBarButtonItemPressed(sender: AnyObject?) {
@@ -293,6 +324,43 @@ class LocationListViewController: UIViewController, UITableViewDelegate, UITable
                     break
                 }
                 strongSelf.refreshControl.endRefreshing()
+        }
+    }
+//    
+//    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+//        var retView: MKAnnotationView? = nil
+//        if annotation.isKindOfClass(CustomPointAnnotation) {
+//            let identifier = "CustomPointAnnotation"
+//            retView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+//            retView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+//            if let retView = retView {
+//                retView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+//            }
+//        } else if annotation.isKindOfClass(MKUserLocation) {
+//            
+//        }
+//        return retView
+//    }
+    
+    static var associatedObjectHandle: UInt8 = 0
+    func locationInMapIsPressed(sender: AnyObject?) {
+        if let projectInfo = objc_getAssociatedObject(sender, &self.dynamicType.associatedObjectHandle) as? ModelProjectItem {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let locationDetailVC = sb.instantiateViewControllerWithIdentifier("LocationDetailViewController") as? LocationDetailViewController {
+                locationDetailVC.projectInfo = projectInfo
+                navigationController?.pushViewController(locationDetailVC, animated: true)
+            }
+        }
+    }
+    
+    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView]) {
+        for annotationView in views {
+            if let annotation = annotationView.annotation as? CustomPointAnnotation {
+                let button = UIButton(type: .DetailDisclosure)
+                objc_setAssociatedObject(button, &self.dynamicType.associatedObjectHandle, annotation.projectInfo, .OBJC_ASSOCIATION_RETAIN)
+                button.addTarget(self, action: #selector(self.locationInMapIsPressed(_:)), forControlEvents: .TouchUpInside)
+                annotationView.rightCalloutAccessoryView = button
+            }
         }
     }
     

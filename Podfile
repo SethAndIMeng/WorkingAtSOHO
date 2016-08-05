@@ -4,7 +4,7 @@ platform :ios, '8.0'
 use_frameworks!
 inhibit_all_warnings!
 
-target 'WoringAtSOHO' do
+target 'WorkingAtSOHO' do
     pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
     pod 'AlamofireObjectMapper', '~> 3.0'
 #    pod 'AlamofireImage', '~> 2.0'
@@ -15,6 +15,7 @@ target 'WoringAtSOHO' do
     pod "PKHUD"
 #    pod 'DZNEmptyDataSet' #空列表显示
     pod 'CGRectExtensions'
+#    pod 'ADClusterMapView'
 end
 
 

@@ -45,6 +45,7 @@ var ProxyCookieSid = ""
 
 //图片基地址url
 let ImageBaseUrl = "http://www.soho3q.com/entry/ImgStreamServlet.do?imgPath="
+//let ImageBaseUrl = ""
 
 //网页url
 let LoginUrl = BaseUrl + "/user/login.html" //登录页
@@ -70,7 +71,12 @@ var SOHO3Q_COOKIE_USER_PHONE = "" //客户的手机号（代客下单ID）
 let SOHO3Q_COOKIE_Expire_Time_Interval = NSTimeInterval(3 * 60 * 60) //3小时后过期
 var SOHO3Q_COOKIE_TOKEN_SET_DATE = NSDate(timeIntervalSince1970: 0) //当前COOKIE的设置时间
 
+
+//共享变量
 let sharedLocationManager = CLLocationManager()
+
+var sharedPlaceHolderImage = UIImage(named: "sh3q-logo-white")
+
 
 class Soho3QUserInfo {
     static let keyToken = "SOHO3Q_COOKIE_TOKEN"

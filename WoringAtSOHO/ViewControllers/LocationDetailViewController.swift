@@ -72,8 +72,10 @@ class LocationDetailViewController: UIViewController, UIScrollViewDelegate, CVCa
                 iv.translatesAutoresizingMaskIntoConstraints = false
                 //            iv.image = UIImage(named: picName)
                 if let imgPath = projectSmallImgs[index].imgPath {
-                    iv.backgroundColor = UIColor.yellowColor()
-                    iv.kf_setImageWithURL(NSURL(string:ImageBaseUrl + imgPath))
+//                    iv.backgroundColor = UIColor.yellowColor()
+                    iv.backgroundColor = UIColor.lightGrayColor()
+//                    iv.kf_setImageWithURL(NSURL(string:ImageBaseUrl + imgPath))
+                    iv.kf_setImageWithURL(NSURL(string:ImageBaseUrl + imgPath), placeholderImage: sharedPlaceHolderImage, optionsInfo: nil, progressBlock: nil, completionHandler: nil)
                 }
                 
                 iv.contentMode = .ScaleAspectFill

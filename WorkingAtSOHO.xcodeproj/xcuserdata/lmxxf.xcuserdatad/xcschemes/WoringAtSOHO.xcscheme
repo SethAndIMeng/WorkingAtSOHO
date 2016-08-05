@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0D02DF591D3730100075596C"
-               BuildableName = "WoringAtSOHO.app"
-               BlueprintName = "WoringAtSOHO"
-               ReferencedContainer = "container:WoringAtSOHO.xcodeproj">
+               BuildableName = "WorkingAtSOHO.app"
+               BlueprintName = "WorkingAtSOHO"
+               ReferencedContainer = "container:WorkingAtSOHO.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0D02DF6D1D3730100075596C"
-               BuildableName = "WoringAtSOHOTests.xctest"
-               BlueprintName = "WoringAtSOHOTests"
-               ReferencedContainer = "container:WoringAtSOHO.xcodeproj">
+               BuildableName = "WorkingAtSOHOTests.xctest"
+               BlueprintName = "WorkingAtSOHOTests"
+               ReferencedContainer = "container:WorkingAtSOHO.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0D02DF781D3730100075596C"
-               BuildableName = "WoringAtSOHOUITests.xctest"
-               BlueprintName = "WoringAtSOHOUITests"
-               ReferencedContainer = "container:WoringAtSOHO.xcodeproj">
+               BuildableName = "WorkingAtSOHOUITests.xctest"
+               BlueprintName = "WorkingAtSOHOUITests"
+               ReferencedContainer = "container:WorkingAtSOHO.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,16 +53,16 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0D02DF591D3730100075596C"
-            BuildableName = "WoringAtSOHO.app"
-            BlueprintName = "WoringAtSOHO"
-            ReferencedContainer = "container:WoringAtSOHO.xcodeproj">
+            BuildableName = "WorkingAtSOHO.app"
+            BlueprintName = "WorkingAtSOHO"
+            ReferencedContainer = "container:WorkingAtSOHO.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0D02DF591D3730100075596C"
-            BuildableName = "WoringAtSOHO.app"
-            BlueprintName = "WoringAtSOHO"
-            ReferencedContainer = "container:WoringAtSOHO.xcodeproj">
+            BuildableName = "WorkingAtSOHO.app"
+            BlueprintName = "WorkingAtSOHO"
+            ReferencedContainer = "container:WorkingAtSOHO.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0D02DF591D3730100075596C"
-            BuildableName = "WoringAtSOHO.app"
-            BlueprintName = "WoringAtSOHO"
-            ReferencedContainer = "container:WoringAtSOHO.xcodeproj">
+            BuildableName = "WorkingAtSOHO.app"
+            BlueprintName = "WorkingAtSOHO"
+            ReferencedContainer = "container:WorkingAtSOHO.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
