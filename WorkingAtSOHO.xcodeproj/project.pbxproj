@@ -31,7 +31,6 @@
 		0DEFA6FF1D4893A000D063BD /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEFA6FE1D4893A000D063BD /* WebViewController.swift */; };
 		0DEFA7011D4894CA00D063BD /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEFA7001D4894CA00D063BD /* PaymentViewController.swift */; };
 		0DFD6D631D5304A700A9CF18 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFD6D621D5304A700A9CF18 /* MapViewController.swift */; };
-		76033D5EB7A828F7C24BF6CC /* Pods_WoringAtSOHO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39E4210630C881AC220C4587 /* Pods_WoringAtSOHO.framework */; };
 		B3A7D2BD150A834106E0D2B8 /* Pods_WorkingAtSOHO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1C9BA6FA073818E24DDD428 /* Pods_WorkingAtSOHO.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,10 +83,8 @@
 		0DEFA7001D4894CA00D063BD /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		0DFD6D621D5304A700A9CF18 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		39E4210630C881AC220C4587 /* Pods_WoringAtSOHO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WoringAtSOHO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		78EE0EDDB0F315522A39ED6B /* Pods-WoringAtSOHO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoringAtSOHO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WoringAtSOHO/Pods-WoringAtSOHO.debug.xcconfig"; sourceTree = "<group>"; };
 		D62463B6D6C23E4712695129 /* Pods-WorkingAtSOHO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkingAtSOHO.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WorkingAtSOHO/Pods-WorkingAtSOHO.debug.xcconfig"; sourceTree = "<group>"; };
 		D7B214D99D90837FF09D9394 /* Pods-WorkingAtSOHO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkingAtSOHO.release.xcconfig"; path = "Pods/Target Support Files/Pods-WorkingAtSOHO/Pods-WorkingAtSOHO.release.xcconfig"; sourceTree = "<group>"; };
-		F0EB0D3B76F30AC86361C31A /* Pods-WoringAtSOHO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WoringAtSOHO.release.xcconfig"; path = "Pods/Target Support Files/Pods-WoringAtSOHO/Pods-WoringAtSOHO.release.xcconfig"; sourceTree = "<group>"; };
 		F1C9BA6FA073818E24DDD428 /* Pods_WorkingAtSOHO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WorkingAtSOHO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -96,7 +93,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76033D5EB7A828F7C24BF6CC /* Pods_WoringAtSOHO.framework in Frameworks */,
 				B3A7D2BD150A834106E0D2B8 /* Pods_WorkingAtSOHO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,8 +220,6 @@
 		4370E2F5C3D976A8895A7B8E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				78EE0EDDB0F315522A39ED6B /* Pods-WoringAtSOHO.debug.xcconfig */,
-				F0EB0D3B76F30AC86361C31A /* Pods-WoringAtSOHO.release.xcconfig */,
 				D62463B6D6C23E4712695129 /* Pods-WorkingAtSOHO.debug.xcconfig */,
 				D7B214D99D90837FF09D9394 /* Pods-WorkingAtSOHO.release.xcconfig */,
 			);
